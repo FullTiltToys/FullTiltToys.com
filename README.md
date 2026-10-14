@@ -22,6 +22,8 @@ Click **Publish** in Cursor to put the site on Vercel. Then point the GoDaddy do
 3. Remove any old A / CNAME / forwarding records that still point at parking or an old host.
 4. Wait for DNS, then open the domain. HTTPS is automatic on Vercel.
 
+This repo includes `vercel.json` so Vercel treats the project as **Next.js**. If a deploy succeeds but every URL shows Vercel’s “This page doesn’t exist” 404, the Framework Preset was likely stuck on **Other** from when the GitHub repo was empty. Redeploy after this file is on `main`. In **Settings → Build and Deployment**, Framework Preset should be Next.js and Output Directory should be empty.
+
 ## Email list (private Google Sheet)
 
 Subscribe writes to a Google Sheet that only you can open. Visitors never see the sheet or anyone else’s email.

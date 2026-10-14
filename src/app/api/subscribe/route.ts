@@ -67,7 +67,7 @@ async function appendSheet(payload: {
 
   try {
     const parsed = JSON.parse(text) as { ok?: boolean };
-    if (parsed.success === false) throw new Error("webhook rejected");
+    if (parsed.ok === false) throw new Error("webhook rejected");
   } catch (error) {
     if (error instanceof SyntaxError) {
       // Apps Script sometimes returns empty/HTML after a redirect; a 200 is enough.

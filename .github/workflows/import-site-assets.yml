@@ -1,0 +1,71 @@
+name: Import site assets
+
+on:
+  push:
+    paths:
+      - .github/workflows/import-site-assets.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download lockfile, favicon, logos, products, and videos
+        env:
+          BASE: https://vector-lifetime-mating-animated.trycloudflare.com
+        run: |
+          set -euo pipefail
+          files=(
+            package-lock.json
+            src/app/favicon.ico
+            public/logos/amazon-on-dark.png
+            public/logos/amazon.png
+            public/logos/bulldozer-games.png
+            public/logos/bulldozer.png
+            public/logos/full-tilt-toys.png
+            public/logos/full-tilt-toys-white.png
+            public/logos/full-tilt-toys-wordmark.png
+            public/logos/kickstarter.png
+            public/logos/nst.png
+            public/logos/oto.png
+            public/products/bulldozer-art.png
+            public/products/bulldozer.jpg
+            public/products/doodle-disaster-contents.png
+            public/products/doodle-disaster.png
+            public/products/oto-art.png
+            public/products/oto.jpg
+            public/videos/bulldozer.mp4
+            public/videos/doodle-disaster.mp4
+            public/videos/oto.mp4
+          )
+          mkdir -p src/app public/logos public/products public/videos
+          for f in "${files[@]}"; do
+            echo "GET $f"
+            curl -fsSL --retry 8 --retry-all-errors --retry-delay 2 -o "$f" "$BASE/$f"
+            echo "  bytes=$(wc -c < "$f")"
+          done
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('public/logos/kickstarter.png').read_bytes()
+          assert p[:8] == b'\x89PNG\r\n\x1a\n', p[:16]
+          print('kickstarter png magic ok', len(p))
+          p2 = Path('public/products/bulldozer-art.png').read_bytes()
+          assert p2[:8] == b'\x89PNG\r\n\x1a\n'
+          print('bulldozer-art png magic ok', len(p2))
+          PY
+      - name: Commit assets and remove importer
+        run: |
+          set -euo pipefail
+          git config user.name "FullTiltToys"
+          git config user.email "Connor@fulltilttoys.com"
+          rm -f .github/workflows/import-site-assets.yml
+          git add package-lock.json src/app/favicon.ico public .github/workflows/import-site-assets.yml
+          git status
+          git commit -m "Add lockfile, favicon, logos, product images, and videos"
+          git push origin HEAD:main

@@ -4,7 +4,9 @@ import path from "node:path";
 import { mailingLists } from "@/lib/site";
 
 const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const LIST_BY_ID = new Map(mailingLists.map((list) => [list.id, list.label]));
+const LIST_BY_ID = new Map<string, string>(
+  mailingLists.map((list) => [list.id, list.label]),
+);
 
 type SubscribeBody = {
   firstName?: unknown;
@@ -65,7 +67,7 @@ async function appendSheet(payload: {
 
   try {
     const parsed = JSON.parse(text) as { ok?: boolean };
-    if (parsed.ok === false) throw new Error("webhook rejected");
+    if (parsed.success === false) throw new Error("webhook rejected");
   } catch (error) {
     if (error instanceof SyntaxError) {
       // Apps Script sometimes returns empty/HTML after a redirect; a 200 is enough.

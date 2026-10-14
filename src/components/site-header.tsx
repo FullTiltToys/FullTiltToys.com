@@ -5,6 +5,12 @@ import { Home, Mail, Share2, Store } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
+declare global {
+  interface Window {
+    updateSiteChrome?: () => void;
+  }
+}
+
 const menu = [
   { id: "home", label: "Home", href: "#home", icon: Home },
   { id: "social", label: "Social", href: "#social", icon: Share2 },

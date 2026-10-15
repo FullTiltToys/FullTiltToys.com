@@ -183,8 +183,7 @@
     background-color 420ms ease;
 }
 
-.nav-label,
-.status-bar-label {
+.nav-label {
   display: inline-block;
   max-width: 7rem;
   overflow: hidden;
@@ -195,46 +194,6 @@
     max-width 640ms cubic-bezier(0.45, 0.02, 0.12, 1),
     opacity 480ms cubic-bezier(0.45, 0.02, 0.12, 1),
     margin 640ms cubic-bezier(0.45, 0.02, 0.12, 1);
-}
-
-.site-status {
-  display: flex;
-  align-items: stretch;
-  gap: 0.35rem;
-  transition: gap 920ms cubic-bezier(0.45, 0.02, 0.12, 1);
-}
-
-.status-bar {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  min-width: 4.25rem;
-  height: 1.7rem;
-  border-radius: 0.25rem;
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  transition:
-    width 920ms cubic-bezier(0.45, 0.02, 0.12, 1),
-    height 920ms cubic-bezier(0.45, 0.02, 0.12, 1),
-    min-width 920ms cubic-bezier(0.45, 0.02, 0.12, 1),
-    border-radius 920ms cubic-bezier(0.45, 0.02, 0.12, 1),
-    flex 920ms cubic-bezier(0.45, 0.02, 0.12, 1);
-}
-
-.status-bar-now {
-  background: #3f8f4d;
-}
-
-.status-bar-ongoing {
-  background: #e0b53a;
-}
-
-.status-bar-upcoming {
-  background: #c4544e;
 }
 
 .site-nav.is-docked {
@@ -255,8 +214,7 @@
   gap: 0.5rem;
 }
 
-.site-nav.is-docked .nav-label,
-.site-nav.is-docked .status-bar-label {
+.site-nav.is-docked .nav-label {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -281,24 +239,6 @@
   border-radius: 0;
   align-items: center;
   justify-content: center;
-}
-
-.site-nav.is-docked .site-status {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 0.45rem;
-}
-
-.site-nav.is-docked .status-bar {
-  flex: none;
-  min-width: 0;
-  width: 0.85rem;
-  height: 0.85rem;
-  margin-inline: auto;
-  padding: 0;
-  border-radius: 999px;
 }
 
 .site-nav.is-docked .site-nav-button.is-on-white,
@@ -580,10 +520,7 @@
   .site-nav,
   .site-nav .site-nav-button,
   .site-nav-links,
-  .site-status,
-  .status-bar,
-  .nav-label,
-  .status-bar-label {
+  .nav-label {
     transition: none;
   }
 }

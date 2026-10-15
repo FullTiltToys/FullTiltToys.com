@@ -133,6 +133,10 @@
 
 .org-tree ul > li:last-child::before {
   content: "└─";
+  position: absolute;
+  left: 0;
+  color: #325d85;
+  font-weight: 700;
 }
 
 .site-btn {
@@ -397,8 +401,41 @@
 }
 
 .product-photo-btn:hover .product-photo,
-.product-photo-btn:focus-visible .product-photo {
-  transform: scale(1.07);
+.product-photo-btn:focus-visible .product-photo,
+.product-card .group\/photo:hover .product-photo,
+.product-card .group\/photo:focus-visible .product-photo {
+  transform: scale(1.04);
+}
+
+.product-card {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: #d4d4d4;
+  box-shadow: 0 12px 28px rgb(15 23 42 / 10%);
+}
+
+.product-card-btn {
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
+}
+
+.product-card-btn:hover,
+.product-card-btn:focus-visible {
+  background: #274a6c;
+  border-color: #274a6c;
+  color: #fff;
+}
+
+.product-dialog::backdrop {
+  background: rgb(15 23 42 / 48%);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -416,7 +453,17 @@
   }
 
   .product-photo-btn:hover .product-photo,
-  .product-photo-btn:focus-visible .product-photo {
+  .product-photo-btn:focus-visible .product-photo,
+  .product-card .group\/photo:hover .product-photo,
+  .product-card .group\/photo:focus-visible .product-photo {
+    transform: none;
+  }
+
+  .product-card {
+    transition: none;
+  }
+
+  .product-card:hover {
     transform: none;
   }
 

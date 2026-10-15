@@ -108,7 +108,7 @@ function formatInquiry(payload: {
   return [
     `Name: ${payload.name}`,
     `Company / Store: ${payload.business}`,
-    `Website: ${payload.website}`,
+    `Website: ${payload.website || "(none)"}`,
     `Email: ${payload.email}`,
     `Phone: ${payload.phone || "(none)"}`,
     `Business type: ${payload.businessTypes.join(", ")}`,
@@ -160,7 +160,7 @@ async function emailInquiry(payload: {
       email: payload.email,
       name: payload.name,
       "Store or company": payload.business,
-      Website: payload.website,
+      Website: payload.website || "(none)",
       Phone: payload.phone || "(none)",
       "Business type": payload.businessTypes.join(", "),
       "Heard about us": payload.hearAbout,
@@ -210,7 +210,8 @@ export async function POST(request: Request) {
 
   const name = asText(body.name, 80);
   const business = asText(body.business, 120);
-  const website = asUrl(body.website);
+  const websiteRaw = asText(body.website, 300);
+  const website = websiteRaw ? asUrl(body.website) : "";
   const email = asText(body.email, 200).toLowerCase();
   const phone = asText(body.phone, 40);
   const businessTypes = asAllowedList(
@@ -234,7 +235,7 @@ export async function POST(request: Request) {
   if (
     !name ||
     !business ||
-    !website ||
+    (websiteRaw && !website) ||
     !EMAIL_OK.test(email) ||
     !businessTypes.length ||
     !hearAllowed

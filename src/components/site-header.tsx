@@ -17,12 +17,6 @@ const menu = [
   { id: "mail", label: "Mail", href: "#contact", icon: Mail },
 ];
 
-const sections = [
-  { id: "now", label: "Now", href: "#doodle-disaster", tone: "now" },
-  { id: "ongoing", label: "Ongoing", href: "#bulldozer", tone: "ongoing" },
-  { id: "upcoming", label: "Upcoming", href: "#oto", tone: "upcoming" },
-];
-
 export function SiteHeader() {
   useEffect(() => {
     const run = () => {
@@ -80,17 +74,6 @@ export function SiteHeader() {
             <span className="nav-label hidden sm:inline">Wholesale</span>
             <span className="sr-only sm:hidden">Wholesale</span>
           </Button>
-        </div>
-        <div className="site-status" aria-label="Product status">
-          {sections.map((item) => (
-            <a
-              key={item.id}
-              href={item.href}
-              className={`status-bar status-bar-${item.tone}`}
-            >
-              <span className="status-bar-label">{item.label}</span>
-            </a>
-          ))}
         </div>
       </nav>
     </header>

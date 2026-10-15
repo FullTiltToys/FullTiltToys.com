@@ -136,6 +136,16 @@
   content: "└─";
 }
 
+#site-header {
+  --header-height: 6.75rem;
+}
+
+@media (min-width: 640px) {
+  #site-header {
+    --header-height: 7.25rem;
+  }
+}
+
 .site-nav {
   position: fixed;
   top: 0;
@@ -143,15 +153,18 @@
   z-index: 60;
   display: flex;
   width: auto;
+  height: var(--header-height);
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
   gap: 0.5rem;
-  background: #325d85;
+  background: transparent;
   padding: 0.7rem 1rem 0.8rem;
   overflow: visible;
+  color: #fff;
   transition:
     width 840ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 840ms cubic-bezier(0.22, 1, 0.36, 1),
     padding 840ms cubic-bezier(0.22, 1, 0.36, 1),
     gap 840ms cubic-bezier(0.22, 1, 0.36, 1),
     top 840ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -216,6 +229,7 @@
 .site-nav.is-docked {
   top: 0.75rem;
   width: 1.5rem;
+  height: auto;
   gap: 0.5rem;
   padding: 0;
   background: transparent;

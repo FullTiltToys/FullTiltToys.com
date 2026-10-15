@@ -48,32 +48,38 @@ export default function Home() {
   return (
     <div id="home" className="min-h-full bg-white">
       <SiteHeader />
-      <section className="grid w-full items-start gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,44%)] lg:px-10">
-        <div>
-          <h1 className="max-w-full text-left">
-            <span className="welcome-kicker block text-[1rem] leading-none sm:text-[1.125rem] lg:text-[1.25rem]">
-              Welcome to
-            </span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logos/full-tilt-toys-wordmark.png"
-              alt="Full Tilt Toys"
-              className="mt-1.5 h-8 w-auto max-w-full sm:h-9 lg:h-10"
-            />
-          </h1>
-          <p className="mt-5 text-base leading-7 text-neutral-600">
-            We are a family-owned toys and games company on a simple mission:
-            put the play back in toys. We design hands-on, interactive products
-            that are easy to pick up, built to last, and fun for years!
-          </p>
+      <section className="w-full px-5 py-12 sm:px-8 lg:px-10">
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,44%)]">
+          <div>
+            <h1 className="max-w-full text-left">
+              <span className="welcome-kicker block text-[1rem] leading-none sm:text-[1.125rem] lg:text-[1.25rem]">
+                Welcome to
+              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logos/full-tilt-toys-wordmark.png"
+                alt="Full Tilt Toys"
+                className="mt-1.5 h-8 w-auto max-w-full sm:h-9 lg:h-10"
+              />
+            </h1>
+            <p className="mt-5 text-base leading-7 text-neutral-600">
+              We are a family-owned toys and games company on a simple mission:
+              put the play back in toys. We design hands-on, interactive products
+              that are easy to pick up, built to last, and fun for years!
+            </p>
+          </div>
+          <div className="self-start">
+            <WelcomeVideos />
+          </div>
+        </div>
 
-          <details className="group mt-6 flex flex-col gap-5 overflow-visible open:mt-3 open:flex-col-reverse">
-            <summary className="site-btn inline-flex w-fit cursor-pointer list-none items-center gap-1.5 rounded-md border border-[#325d85] bg-white px-3 py-2 text-sm font-semibold text-[#325d85] [&::-webkit-details-marker]:hidden">
-              <span className="group-open:hidden">More about us</span>
-              <span className="hidden group-open:inline">Less about us</span>
-              <ChevronDown className="size-4 group-open:hidden" />
-              <ChevronUp className="hidden size-4 group-open:inline" />
-            </summary>
+        <details className="group mt-6 flex flex-col gap-5 overflow-visible open:mt-3 open:flex-col-reverse">
+          <summary className="site-btn flex w-full cursor-pointer list-none items-center justify-center gap-1.5 rounded-md border border-[#325d85] bg-white px-3 py-2.5 text-sm font-semibold text-[#325d85] [&::-webkit-details-marker]:hidden">
+            <span className="group-open:hidden">More about us</span>
+            <span className="hidden group-open:inline">Less about us</span>
+            <ChevronDown className="size-4 group-open:hidden" />
+            <ChevronUp className="hidden size-4 group-open:inline" />
+          </summary>
 
             <div className="space-y-7">
               <p className="text-base leading-7 text-neutral-600">
@@ -84,7 +90,7 @@ export default function Home() {
                 possible.
               </p>
 
-              <div className="grid items-start gap-8 sm:grid-cols-2 lg:w-[calc(178.57%+2.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(18rem,44%)] lg:gap-10">
+              <div className="grid items-start gap-8 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,44%)] lg:gap-10">
               <div>
                 <h2 className="text-lg font-bold tracking-tight text-neutral-900">
                   Organization
@@ -160,7 +166,7 @@ export default function Home() {
               </div>
             </div>
 
-              <div className="grid items-start gap-8 sm:grid-cols-2 lg:w-[calc(178.57%+2.5rem)] lg:gap-10">
+              <div className="grid items-start gap-8 sm:grid-cols-2 lg:gap-10">
                 <div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -193,11 +199,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </details>
-        </div>
-        <div className="self-start">
-          <WelcomeVideos />
-        </div>
+        </details>
       </section>
       <LogoMarquee />
       <ProductList />

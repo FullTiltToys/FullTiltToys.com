@@ -133,10 +133,6 @@
 
 .org-tree ul > li:last-child::before {
   content: "└─";
-  position: absolute;
-  left: 0;
-  color: #325d85;
-  font-weight: 700;
 }
 
 .site-btn {
@@ -438,6 +434,23 @@
   background: rgb(15 23 42 / 48%);
 }
 
+.social-icon-link {
+  transition:
+    transform 160ms ease,
+    color 160ms ease;
+}
+
+.social-icon-link:hover,
+.social-icon-link:focus-visible {
+  transform: translateY(-3px);
+}
+
+.social-icon-link:focus-visible {
+  outline: 2px solid #325d85;
+  outline-offset: 4px;
+  border-radius: 0.75rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .logo-marquee-track {
     animation: none;
@@ -464,6 +477,15 @@
   }
 
   .product-card:hover {
+    transform: none;
+  }
+
+  .social-icon-link {
+    transition: none;
+  }
+
+  .social-icon-link:hover,
+  .social-icon-link:focus-visible {
     transform: none;
   }
 

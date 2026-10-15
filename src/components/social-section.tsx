@@ -79,10 +79,10 @@ export function SocialSection() {
       id="social"
       className="scroll-mt-24 border-t border-neutral-200 bg-white"
     >
-      <div className="flex w-full justify-end py-12 pl-5 sm:pl-8 lg:pl-10">
+      <div className="flex w-full justify-end px-5 py-12 sm:px-8 lg:px-10">
         <div
           id="social-frame"
-          className="-mr-6 w-full max-w-4xl rounded-tl-[3rem] rounded-bl-[3rem] border-y-[1.5rem] border-l-[1.5rem] border-[#325d85] bg-white py-6 pl-5 pr-12 text-right sm:pl-6 sm:pr-16"
+          className="w-full max-w-4xl rounded-tl-[3rem] rounded-bl-[3rem] border-y-[1.5rem] border-l-[1.5rem] border-[#325d85] bg-white py-6 pl-5 pr-8 text-right sm:pl-6 sm:pr-10"
         >
           <h2 className="text-2xl font-bold tracking-tight text-neutral-900">
             Social Media

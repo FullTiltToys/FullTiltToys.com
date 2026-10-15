@@ -51,7 +51,7 @@ export default function Home() {
       <section className="grid w-full items-start gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,44%)] lg:px-10">
         <div>
           <h1 className="max-w-full text-left">
-            <span className="block text-[0.7rem] font-normal not-italic leading-none text-black sm:text-xs">
+            <span className="welcome-kicker block text-[1rem] leading-none sm:text-[1.125rem] lg:text-[1.25rem]">
               Welcome to
             </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -61,8 +61,7 @@ export default function Home() {
               className="mt-1.5 h-8 w-auto max-w-full sm:h-9 lg:h-10"
             />
           </h1>
-          <p className="mt-5 text-base leading-7 text-neutral-600">Hello,</p>
-          <p className="mt-3 text-base leading-7 text-neutral-600">
+          <p className="mt-5 text-base leading-7 text-neutral-600">
             We are a family-owned toys and games company on a simple mission:
             put the play back in toys. We design hands-on, interactive products
             that are easy to pick up, built to last, and fun for years!

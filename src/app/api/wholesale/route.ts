@@ -40,28 +40,32 @@ async function emailInquiry(payload: {
   phone: string;
   message: string;
 }) {
+  const accessKey = process.env.WEB3FORMS_ACCESS_KEY ?? "";
+  if (!accessKey) {
+    throw new Error("missing WEB3FORMS_ACCESS_KEY");
+  }
+
   const to = process.env.WHOLESALE_TO_EMAIL || site.email;
-  const response = await fetch(
-    `https://formsubmit.co/ajax/${encodeURIComponent(to)}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        _subject: `Wholesale inquiry from ${payload.business || payload.name}`,
-        _template: "table",
-        _captcha: "false",
-        Name: payload.name,
-        "Store or company": payload.business,
-        Email: payload.email,
-        Phone: payload.phone || "(none)",
-        Message: payload.message || "(none)",
-      }),
-      signal: AbortSignal.timeout(10000),
+  const response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
     },
-  );
+    body: JSON.stringify({
+      access_key: accessKey,
+      subject: `Wholesale inquiry from ${payload.business || payload.name}`,
+      from_name: "Full Tilt Toys website",
+      replyto: payload.email,
+      email: payload.email,
+      name: payload.name,
+      "Store or company": payload.business,
+      Phone: payload.phone || "(none)",
+      Message: payload.message || "(none)",
+      Inbox: to,
+    }),
+    signal: AbortSignal.timeout(10000),
+  });
 
   const text = await response.text();
   if (!response.ok) {
@@ -69,10 +73,12 @@ async function emailInquiry(payload: {
   }
 
   try {
-    const parsed = JSON.parse(text) as { success?: string | boolean };
+    const parsed = JSON.parse(text) as { success?: boolean };
     if (parsed.success === false) throw new Error("email rejected");
   } catch (error) {
-    if (error instanceof SyntaxError) return;
+    if (error instanceof SyntaxError) {
+      throw new Error("email invalid response");
+    }
     throw error;
   }
 }
@@ -108,21 +114,16 @@ export async function POST(request: Request) {
     message,
   };
 
-  let emailed = false;
   try {
     await emailInquiry({ name, business, email, phone, message });
-    emailed = true;
   } catch {
     if (process.env.NODE_ENV === "production") {
       return json(502, { ok: false, error: "send failed" });
     }
-  }
-
-  if (!emailed || process.env.NODE_ENV !== "production") {
     try {
       await appendLocal(row);
     } catch {
-      if (!emailed) return json(502, { ok: false, error: "send failed" });
+      return json(502, { ok: false, error: "send failed" });
     }
   }
 

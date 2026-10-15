@@ -11,7 +11,17 @@ npm run dev
 
 ## Wholesale inquiries
 
-The Wholesale button in the top-right nav opens a short form. Submissions email **info@fulltilttoys.com**. The first inquiry sends a confirmation link to that inbox; click it once so later forms arrive as email.
+The Wholesale button emails **info@fulltilttoys.com** so you can send that shop a catalog, pricing, and availability.
+
+This uses a free [Web3Forms](https://web3forms.com) access key. FormSubmit is not used.
+
+1. Open [web3forms.com](https://web3forms.com), enter **info@fulltilttoys.com**, and create an access key.
+2. Confirm the key in that inbox (and spam) if they send a verification email.
+3. In Vercel: **Settings → Environment Variables**. Add:
+   - `WHOLESALE_TO_EMAIL` = `info@fulltilttoys.com`
+   - `WEB3FORMS_ACCESS_KEY` = the key from step 1  
+   Apply both to Production, Preview, and Development.
+4. Redeploy. Send a test Wholesale form. You should get an email you can reply to.
 
 ## Publish
 

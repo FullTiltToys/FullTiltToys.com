@@ -137,12 +137,12 @@
 }
 
 #site-header {
-  --header-height: 6.75rem;
+  --header-height: 3.75rem;
 }
 
 @media (min-width: 640px) {
   #site-header {
-    --header-height: 7.25rem;
+    --header-height: 4.15rem;
   }
 }
 
@@ -168,6 +168,7 @@
     padding 840ms cubic-bezier(0.22, 1, 0.36, 1),
     gap 840ms cubic-bezier(0.22, 1, 0.36, 1),
     top 840ms cubic-bezier(0.22, 1, 0.36, 1),
+    right 840ms cubic-bezier(0.22, 1, 0.36, 1),
     background-color 520ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -179,16 +180,7 @@
 }
 
 .site-nav.is-flipping {
-  background-color: transparent;
-}
-
-.site-nav-veil {
-  position: fixed;
-  z-index: 59;
-  background: #325d85;
-  pointer-events: none;
-  transform-origin: center center;
-  will-change: transform, opacity;
+  background: transparent;
 }
 
 @media (min-width: 640px) {
@@ -228,11 +220,13 @@
 
 .site-nav.is-docked {
   top: 0.75rem;
+  right: 1.75rem;
   width: 1.5rem;
   height: auto;
   gap: 0.5rem;
   padding: 0;
-  background: transparent;
+  background: transparent !important;
+  box-shadow: none;
   align-items: center;
   overflow: visible;
 }
@@ -551,8 +545,7 @@
   .site-nav,
   .site-nav .site-nav-button,
   .site-nav-links,
-  .nav-label,
-  .site-nav-veil {
+  .nav-label {
     transition: none;
   }
 }

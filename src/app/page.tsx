@@ -50,12 +50,15 @@ export default function Home() {
       <SiteHeader />
       <section className="grid w-full items-start gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,44%)] lg:px-10">
         <div>
-          <h1 className="max-w-full">
+          <h1 className="max-w-full text-left">
+            <span className="block text-[0.7rem] font-normal not-italic leading-none text-black sm:text-xs">
+              Welcome to
+            </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logos/full-tilt-toys-wordmark.png"
               alt="Full Tilt Toys"
-              className="h-11 w-auto max-w-full sm:h-12 lg:h-14"
+              className="mt-1.5 h-8 w-auto max-w-full sm:h-9 lg:h-10"
             />
           </h1>
           <p className="mt-5 text-base leading-7 text-neutral-600">Hello,</p>

@@ -157,18 +157,19 @@ export const wholesaleFormScript = `
     var hearAboutOther = ((form.hearAboutOther && form.hearAboutOther.value) || "").trim();
     var hearOk = !!hearAbout && (hearAbout !== "Other" || !!hearAboutOther);
 
+    var websiteOk = !websiteValue || !!website;
     mark(form.fullName, !name);
     mark(form.business, !business);
-    mark(form.website, !website);
+    mark(form.website, !websiteOk);
     mark(form.email, !validEmail);
     mark(form.hearAbout, !hearAbout);
     mark(form.hearAboutOther, hearAbout === "Other" && !hearAboutOther);
     hide(emailError, validEmail);
-    hide(websiteError, !websiteValue || !!website);
+    hide(websiteError, websiteOk);
     hide(typeError, types.length > 0);
     hide(hearError, hearOk);
 
-    var valid = !!(name && business && website && validEmail && types.length && hearOk);
+    var valid = !!(name && business && websiteOk && validEmail && types.length && hearOk);
     hide(requiredError, valid);
     if (!valid) {
       var firstInvalid = form.querySelector('[aria-invalid="true"]');

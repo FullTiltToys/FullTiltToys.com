@@ -85,29 +85,33 @@ export function ProductCard({ product }: { product: Product }) {
             {card.title}
           </button>
         </h3>
-        <p className="mt-1 text-sm leading-6 text-neutral-600">{card.tagline}</p>
+        <p className="mt-1 line-clamp-1 text-sm leading-6 text-neutral-600">
+          {card.tagline}
+        </p>
         <p className="mt-3 text-xs tracking-wide text-neutral-500">
           {card.specs.join(" · ")}
         </p>
-        {shop && card.cta.href ? (
-          <a
-            href={card.cta.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="product-card-btn mt-auto pt-5 inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-md bg-[#325d85] text-sm font-semibold text-white"
-          >
-            {card.cta.label}
-            <ArrowUpRight className="size-4" />
-          </a>
-        ) : (
-          <button
-            type="button"
-            data-product-open={product.slug}
-            className="product-card-btn mt-auto pt-5 inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md border border-[#325d85] bg-white text-sm font-semibold text-[#325d85]"
-          >
-            {card.cta.label}
-          </button>
-        )}
+        <div className="mt-auto pt-5">
+          {shop && card.cta.href ? (
+            <a
+              href={card.cta.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="product-card-btn inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-md bg-[#325d85] text-sm font-semibold text-white"
+            >
+              {card.cta.label}
+              <ArrowUpRight className="size-4" />
+            </a>
+          ) : (
+            <button
+              type="button"
+              data-product-open={product.slug}
+              className="product-card-btn inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md border border-[#325d85] bg-white text-sm font-semibold text-[#325d85]"
+            >
+              {card.cta.label}
+            </button>
+          )}
+        </div>
       </article>
     </li>
   );

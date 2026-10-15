@@ -87,35 +87,6 @@ export function WholesaleDialog() {
                   <div className="space-y-1">
                     <div className="flex flex-wrap items-baseline gap-x-2">
                       <label
-                        htmlFor="wholesale-website"
-                        className="text-sm font-medium"
-                      >
-                        Website{" "}
-                        <span className="font-semibold text-[#325d85]">*</span>
-                      </label>
-                      <span
-                        id="wholesale-website-error"
-                        role="alert"
-                        hidden
-                        className="text-[11px] font-medium text-red-600"
-                      >
-                        enter a valid website
-                      </span>
-                    </div>
-                    <input
-                      id="wholesale-website"
-                      name="website"
-                      type="url"
-                      inputMode="url"
-                      autoComplete="url"
-                      placeholder="https://"
-                      required
-                      className={fieldClass}
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="flex flex-wrap items-baseline gap-x-2">
-                      <label
                         htmlFor="wholesale-email"
                         className="text-sm font-medium"
                       >
@@ -271,6 +242,33 @@ export function WholesaleDialog() {
                       className="w-full rounded-md border border-neutral-300 bg-white px-2.5 py-2 text-sm font-normal outline-none focus-visible:border-[#325d85]"
                     />
                   </label>
+                  <div className="space-y-1">
+                    <div className="flex flex-wrap items-baseline gap-x-2">
+                      <label
+                        htmlFor="wholesale-website"
+                        className="text-sm font-medium"
+                      >
+                        Website
+                      </label>
+                      <span
+                        id="wholesale-website-error"
+                        role="alert"
+                        hidden
+                        className="text-[11px] font-medium text-red-600"
+                      >
+                        enter a valid website
+                      </span>
+                    </div>
+                    <input
+                      id="wholesale-website"
+                      name="website"
+                      type="url"
+                      inputMode="url"
+                      autoComplete="url"
+                      placeholder="https://"
+                      className={fieldClass}
+                    />
+                  </div>
                   <label className="block space-y-1 text-sm font-medium">
                     <span className="block">Phone</span>
                     <input

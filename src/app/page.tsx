@@ -201,8 +201,14 @@ export default function Home() {
       </section>
       <LogoMarquee />
       <ProductList />
-      <SocialSection />
-      <ContactSection />
+      <section className="border-t border-neutral-200 bg-white">
+        <div className="grid w-full gap-12 px-5 py-14 sm:px-8 lg:grid-cols-2 lg:items-start lg:gap-0 lg:px-10">
+          <div className="lg:pr-16 xl:pr-20">
+            <SocialSection />
+          </div>
+          <ContactSection />
+        </div>
+      </section>
       <SiteFooter />
     </div>
   );

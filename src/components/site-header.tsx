@@ -34,12 +34,12 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header id="site-header" className="border-b border-neutral-200 bg-white">
+    <header id="site-header" className="bg-[#325d85]">
       <div className="flex min-h-[6.75rem] w-full items-center pl-5 sm:min-h-[7.25rem] sm:pl-8 lg:pl-10">
         <a href="#home" className="shrink-0" aria-label="Full Tilt Toys home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logos/full-tilt-toys.png"
+            src="/logos/full-tilt-toys-white.png"
             alt="Full Tilt Toys"
             className="h-16 w-auto sm:h-[4.5rem]"
           />

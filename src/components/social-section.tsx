@@ -62,12 +62,12 @@ function SocialIcon({ name }: { name: (typeof socialLinks)[number]["label"] }) {
   }
 
   return (
-    <span className="flex size-11 items-center justify-center overflow-hidden rounded-xl bg-black">
+    <span className="flex size-11 items-center justify-center bg-[#232F3E]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/logos/amazon.png"
+        src="/logos/amazon-on-dark.png"
         alt=""
-        className="size-11 object-cover"
+        className="size-[1.85rem] object-contain"
       />
     </span>
   );

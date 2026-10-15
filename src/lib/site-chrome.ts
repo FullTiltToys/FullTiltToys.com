@@ -113,38 +113,21 @@ export const siteChromeScript = `
     );
   }
 
-  function navVeil() {
-    var node = document.querySelector(".site-nav-veil");
-    if (!node) {
-      node = document.createElement("div");
-      node.className = "site-nav-veil";
-      document.body.appendChild(node);
-    }
-    return node;
-  }
-
-  function placeVeil(node, rect) {
-    node.style.left = rect.left + "px";
-    node.style.top = rect.top + "px";
-    node.style.width = rect.width + "px";
-    node.style.height = rect.height + "px";
-  }
-
   function flipDock(nav, docked) {
     var els = dockItems(nav);
     var token = ++flipGen;
     var first = [];
-    var firstNav = nav.getBoundingClientRect();
     var i;
     for (i = 0; i < els.length; i++) {
       first.push(els[i].getBoundingClientRect());
     }
 
+    var leftover = document.querySelector(".site-nav-veil");
+    if (leftover) leftover.remove();
+
     if (reduceMotion()) {
       nav.classList.toggle("is-docked", docked);
       nav.classList.remove("is-flipping", "is-measuring");
-      var oldVeil = document.querySelector(".site-nav-veil");
-      if (oldVeil) oldVeil.remove();
       return;
     }
 
@@ -153,22 +136,18 @@ export const siteChromeScript = `
     void nav.offsetWidth;
 
     var last = [];
-    var lastNav = nav.getBoundingClientRect();
     for (i = 0; i < els.length; i++) {
       last.push(els[i].getBoundingClientRect());
     }
 
     nav.classList.remove("is-measuring");
 
-    var veil = navVeil();
-    placeVeil(veil, lastNav);
     var pending = 0;
     function finished() {
       if (token !== flipGen) return;
       pending -= 1;
       if (pending > 0) return;
       nav.classList.remove("is-flipping");
-      if (veil.parentNode) veil.remove();
     }
     function track(anim) {
       if (!anim) return;
@@ -176,16 +155,6 @@ export const siteChromeScript = `
       anim.onfinish = finished;
       anim.oncancel = finished;
     }
-
-    track(
-      playFlip(
-        veil,
-        firstNav,
-        lastNav,
-        { opacity: docked ? 1 : 0 },
-        { opacity: docked ? 0 : 1 }
-      )
-    );
 
     for (i = 0; i < els.length; i++) {
       els[i].style.transformOrigin = "center center";
@@ -199,6 +168,9 @@ export const siteChromeScript = `
   }
 
   function update() {
+    var staleVeil = document.querySelector(".site-nav-veil");
+    if (staleVeil) staleVeil.remove();
+
     var header = document.getElementById("site-header");
     var nav = document.getElementById("site-nav");
     var frame = document.getElementById("social-frame");

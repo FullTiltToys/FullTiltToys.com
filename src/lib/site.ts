@@ -7,6 +7,16 @@ export const products = [
   {
     slug: "doodle-disaster",
     name: "Doodle Disaster",
+    card: {
+      title: "Doodle Disaster",
+      tagline: "A party drawing game of hilarious miscommunication",
+      badge: "Available Now",
+      specs: ["2–6 players", "Ages 12+", "Under 45 min"],
+      cta: {
+        label: "Shop",
+        href: "https://www.amazon.com/dp/B0FQ69JKDG?lv",
+      },
+    },
     banner: "Available now",
     bannerClass: "bg-[#2a4d32] text-white",
     factsLogo: {
@@ -91,6 +101,16 @@ export const products = [
   {
     slug: "bulldozer",
     name: "Bulldozer | It's Time To Play Dirty!",
+    card: {
+      title: "Bulldozer",
+      tagline: "A 2-player strategy game of rocks, dice, and dynamite",
+      badge: "Coming Soon",
+      specs: ["2 players", "Ages 7+", "Under 45 min"],
+      cta: {
+        label: "Learn More",
+        href: null,
+      },
+    },
     banner: "Current Project",
     bannerClass: "bg-[#c48a2a] text-white",
     factsLogo: {
@@ -162,6 +182,16 @@ export const products = [
   {
     slug: "oto",
     name: "OTO | Curiously Controllable",
+    card: {
+      title: "OTO",
+      tagline: "A curiously controllable desktop fidget toy vehicle",
+      badge: "Coming Soon",
+      specs: ["No batteries", "No electronics", "Desktop play"],
+      cta: {
+        label: "Learn More",
+        href: null,
+      },
+    },
     banner: "Upcoming Project",
     bannerClass: "bg-[#a85a55] text-white",
     factsLogo: {

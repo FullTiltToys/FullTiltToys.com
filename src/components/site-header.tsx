@@ -37,12 +37,14 @@ export function SiteHeader() {
     <header id="site-header" className="bg-[#325d85]">
       <div className="flex min-h-[6.75rem] w-full items-center pl-5 sm:min-h-[7.25rem] sm:pl-8 lg:pl-10">
         <a href="#home" className="shrink-0" aria-label="Full Tilt Toys home">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logos/full-tilt-toys-white.png"
-            alt="Full Tilt Toys"
-            className="h-16 w-auto sm:h-[4.5rem]"
-          />
+          <span className="relative block aspect-[1909/332] h-12 overflow-hidden sm:h-14">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logos/full-tilt-toys-white.png"
+              alt="Full Tilt Toys"
+              className="absolute top-0 left-0 w-full max-w-none"
+            />
+          </span>
         </a>
       </div>
       <nav

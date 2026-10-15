@@ -52,7 +52,7 @@ export const siteChromeScript = `
   }
 
   function dockItems(nav) {
-    return nav.querySelectorAll(".site-nav-button, .status-bar");
+    return nav.querySelectorAll(".site-nav-button");
   }
 
   function flipDock(nav, docked) {

@@ -1,19 +1,27 @@
-import { mailingLists, showSubscribeForm } from "@/lib/site";
+import { mailingLists, showSubscribeForm, site } from "@/lib/site";
 import { subscribeDozerScript } from "@/lib/subscribe-dozer";
 
 export function ContactSection() {
   return (
-    <section id="contact" className="border-t border-neutral-200 bg-white">
-      <div className="w-full px-5 py-8 sm:px-8 lg:px-10">
-        <div>
-          <h2 className="text-xl font-bold tracking-tight text-neutral-900">
-            Contact us
-          </h2>
-          <p className="mt-1.5 max-w-3xl text-sm leading-6 text-neutral-600">
-            We’d love to hear from you. Email us at info@FullTiltToys.com for
-            questions, orders, or anything else.
-          </p>
-        </div>
+    <div
+      id="contact"
+      className="scroll-mt-24 border-t border-neutral-200 pt-12 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-16 xl:pl-20"
+    >
+      <div>
+        <h2 className="text-2xl font-bold tracking-tight text-[#325d85]">
+          Contact us
+        </h2>
+        <p className="mt-3 max-w-md text-base leading-7 text-neutral-600">
+          We’d love to hear from you. Questions, orders, or anything else —
+          send us a note and we’ll get back to you.
+        </p>
+        <a
+          href={`mailto:${site.email}`}
+          className="mt-5 inline-flex text-lg font-semibold text-[#325d85] underline-offset-4 hover:underline"
+        >
+          {site.email}
+        </a>
+      </div>
 
         {showSubscribeForm ? (
         <div id="subscribe" className="mt-6 border-t border-neutral-200 pt-6">
@@ -177,7 +185,6 @@ export function ContactSection() {
           />
         </div>
         ) : null}
-      </div>
-    </section>
+    </div>
   );
 }

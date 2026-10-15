@@ -1,6 +1,6 @@
 export function SiteFooter() {
   return (
-    <footer className="relative z-50 -mr-6 bg-[#325d85]">
+    <footer className="relative z-50 bg-[#325d85]">
       <div className="flex items-center justify-end py-2 pr-5 pl-5">
         <a href="#home" className="relative z-50 shrink-0" aria-label="Full Tilt Toys home">
           {/* eslint-disable-next-line @next/next/no-img-element */}

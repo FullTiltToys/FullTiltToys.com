@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Barlow_Condensed, Geist, Geist_Mono } from "next/font/google";
 
 import { SiteChromeScript } from "@/components/site-chrome-script";
 import { WholesaleDialog } from "@/components/wholesale-dialog";
@@ -16,6 +16,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const wordmark = Barlow_Condensed({
+  variable: "--font-wordmark",
+  subsets: ["latin"],
+  weight: ["800"],
+  style: ["italic"],
+});
+
 export const metadata: Metadata = {
   title: "Full Tilt Toys",
   description:
@@ -26,20 +33,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${wordmark.variable} h-full antialiased`}
     >
-      <body className="min-h-full pr-6">
+      <body className="min-h-full">
         {children}
-        <div
-          id="right-bar-top"
-          aria-hidden
-          className="pointer-events-none fixed top-0 right-0 z-40 w-6 bg-[#325d85]"
-        />
-        <div
-          id="right-bar-bottom"
-          aria-hidden
-          className="pointer-events-none fixed right-0 z-40 w-6 bg-[#325d85]"
-        />
         <WholesaleDialog />
         <SiteChromeScript />
       </body>

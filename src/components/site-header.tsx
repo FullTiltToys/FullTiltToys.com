@@ -1,15 +1,6 @@
-"use client";
-
-import { useEffect } from "react";
 import { Home, Mail, Share2, Store } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-
-declare global {
-  interface Window {
-    updateSiteChrome?: () => void;
-  }
-}
 
 const menu = [
   { id: "home", label: "Home", href: "#home", icon: Home },
@@ -18,24 +9,9 @@ const menu = [
 ];
 
 export function SiteHeader() {
-  useEffect(() => {
-    const run = () => {
-      window.updateSiteChrome?.();
-    };
-    run();
-    window.addEventListener("scroll", run, { passive: true, capture: true });
-    window.addEventListener("resize", run);
-    document.addEventListener("scroll", run, { passive: true, capture: true });
-    return () => {
-      window.removeEventListener("scroll", run, true);
-      window.removeEventListener("resize", run);
-      document.removeEventListener("scroll", run, true);
-    };
-  }, []);
-
   return (
     <header id="site-header" className="bg-[#325d85]">
-      <div className="flex min-h-[3.75rem] w-full items-center pl-5 sm:min-h-[4.15rem] sm:pl-8 lg:pl-10">
+      <div className="flex min-h-[3.75rem] w-full items-center justify-between gap-3 pl-5 pr-3 sm:min-h-[4.15rem] sm:pl-8 sm:pr-4 lg:pl-10">
         <a href="#home" className="shrink-0" aria-label="Full Tilt Toys home">
           <span className="relative block aspect-[1909/332] h-9 overflow-hidden sm:h-[2.625rem]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -46,23 +22,16 @@ export function SiteHeader() {
             />
           </span>
         </a>
-      </div>
-      <nav
-        id="site-nav"
-        aria-label="Site"
-        className="site-nav"
-        suppressHydrationWarning
-      >
-        <div className="site-nav-links">
+        <nav id="site-nav" aria-label="Site" className="flex items-center">
           {menu.map((item) => (
             <Button
               key={item.id}
               variant="ghost"
-              className="site-nav-button h-10 gap-2 px-2 text-sm font-semibold text-white hover:bg-white/15 hover:text-white sm:px-3"
+              className="h-10 gap-2 px-2 text-sm font-semibold text-white hover:bg-white/15 hover:text-white sm:px-3"
               render={<a href={item.href} />}
             >
               <item.icon className="size-4" />
-              <span className="nav-label hidden sm:inline">{item.label}</span>
+              <span className="hidden sm:inline">{item.label}</span>
               <span className="sr-only sm:hidden">{item.label}</span>
             </Button>
           ))}
@@ -70,14 +39,14 @@ export function SiteHeader() {
             type="button"
             data-wholesale-open
             variant="ghost"
-            className="site-nav-button h-10 gap-2 px-2 text-sm font-semibold text-white hover:bg-white/15 hover:text-white sm:px-3"
+            className="h-10 gap-2 px-2 text-sm font-semibold text-white hover:bg-white/15 hover:text-white sm:px-3"
           >
             <Store className="size-4" />
-            <span className="nav-label hidden sm:inline">Wholesale</span>
+            <span className="hidden sm:inline">Wholesale</span>
             <span className="sr-only sm:hidden">Wholesale</span>
           </Button>
-        </div>
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 }

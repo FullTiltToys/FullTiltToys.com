@@ -35,9 +35,9 @@ export function SiteHeader() {
 
   return (
     <header id="site-header" className="bg-[#325d85]">
-      <div className="flex min-h-[6.75rem] w-full items-center pl-5 sm:min-h-[7.25rem] sm:pl-8 lg:pl-10">
+      <div className="flex min-h-[3.75rem] w-full items-center pl-5 sm:min-h-[4.15rem] sm:pl-8 lg:pl-10">
         <a href="#home" className="shrink-0" aria-label="Full Tilt Toys home">
-          <span className="relative block aspect-[1909/332] h-12 overflow-hidden sm:h-14">
+          <span className="relative block aspect-[1909/332] h-9 overflow-hidden sm:h-[2.625rem]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logos/full-tilt-toys-white.png"

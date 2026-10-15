@@ -55,71 +55,146 @@ export const siteChromeScript = `
     return nav.querySelectorAll(".site-nav-button");
   }
 
+  var flipGen = 0;
+  var dockEase = "cubic-bezier(0.22, 1, 0.36, 1)";
+  var dockMs = 840;
+
+  function cancelAnims(el) {
+    var running = el.getAnimations();
+    var a;
+    for (a = 0; a < running.length; a++) running[a].cancel();
+  }
+
+  function invertTransform(first, last) {
+    var dx = first.left + first.width / 2 - (last.left + last.width / 2);
+    var dy = first.top + first.height / 2 - (last.top + last.height / 2);
+    var sx = last.width ? first.width / last.width : 1;
+    var sy = last.height ? first.height / last.height : 1;
+    return {
+      dx: dx,
+      dy: dy,
+      sx: sx,
+      sy: sy,
+      idle:
+        Math.abs(dx) < 0.4 &&
+        Math.abs(dy) < 0.4 &&
+        Math.abs(sx - 1) < 0.02 &&
+        Math.abs(sy - 1) < 0.02,
+    };
+  }
+
+  function playFlip(el, first, last, fromExtra, toExtra) {
+    var inv = invertTransform(first, last);
+    if (inv.idle) return null;
+    cancelAnims(el);
+    return el.animate(
+      [
+        Object.assign(
+          {
+            transform:
+              "translate(" +
+              inv.dx +
+              "px, " +
+              inv.dy +
+              "px) scale(" +
+              inv.sx +
+              ", " +
+              inv.sy +
+              ")",
+          },
+          fromExtra || {}
+        ),
+        Object.assign(
+          { transform: "translate(0px, 0px) scale(1, 1)" },
+          toExtra || {}
+        ),
+      ],
+      { duration: dockMs, easing: dockEase, fill: "both" }
+    );
+  }
+
+  function navVeil() {
+    var node = document.querySelector(".site-nav-veil");
+    if (!node) {
+      node = document.createElement("div");
+      node.className = "site-nav-veil";
+      document.body.appendChild(node);
+    }
+    return node;
+  }
+
+  function placeVeil(node, rect) {
+    node.style.left = rect.left + "px";
+    node.style.top = rect.top + "px";
+    node.style.width = rect.width + "px";
+    node.style.height = rect.height + "px";
+  }
+
   function flipDock(nav, docked) {
     var els = dockItems(nav);
+    var token = ++flipGen;
     var first = [];
+    var firstNav = nav.getBoundingClientRect();
     var i;
     for (i = 0; i < els.length; i++) {
       first.push(els[i].getBoundingClientRect());
     }
+
+    if (reduceMotion()) {
+      nav.classList.toggle("is-docked", docked);
+      nav.classList.remove("is-flipping", "is-measuring");
+      var oldVeil = document.querySelector(".site-nav-veil");
+      if (oldVeil) oldVeil.remove();
+      return;
+    }
+
+    nav.classList.add("is-measuring", "is-flipping");
     nav.classList.toggle("is-docked", docked);
-    if (reduceMotion()) return;
+    void nav.offsetWidth;
+
+    var last = [];
+    var lastNav = nav.getBoundingClientRect();
     for (i = 0; i < els.length; i++) {
-      var el = els[i];
-      var last = el.getBoundingClientRect();
-      var dx = first[i].left + first[i].width / 2 - (last.left + last.width / 2);
-      var dy = first[i].top + first[i].height / 2 - (last.top + last.height / 2);
-      if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) continue;
-      var running = el.getAnimations();
-      var a;
-      for (a = 0; a < running.length; a++) running[a].cancel();
-      var arcX = docked ? -18 : 18;
-      var arcY = docked ? 12 : -12;
-      el.animate(
-        [
-          {
-            transform:
-              "translate(" +
-              dx +
-              "px, " +
-              dy +
-              "px) rotate(" +
-              (docked ? "-5deg" : "5deg") +
-              ") scale(1.03)",
-          },
-          {
-            offset: 0.4,
-            transform:
-              "translate(" +
-              (dx * 0.58 + arcX) +
-              "px, " +
-              (dy * 0.5 + arcY) +
-              "px) rotate(" +
-              (docked ? "-7deg" : "7deg") +
-              ") scale(1.01)",
-          },
-          {
-            offset: 0.74,
-            transform:
-              "translate(" +
-              dx * 0.16 +
-              "px, " +
-              dy * 0.12 +
-              "px) rotate(" +
-              (docked ? "-2deg" : "2deg") +
-              ") scale(1)",
-          },
-          {
-            transform: "translate(0, 0) rotate(0deg) scale(1)",
-          },
-        ],
-        {
-          duration: 980,
-          delay: i * 70,
-          easing: "cubic-bezier(0.45, 0.02, 0.12, 1)",
-          fill: "both",
-        }
-      );
+      last.push(els[i].getBoundingClientRect());
+    }
+
+    nav.classList.remove("is-measuring");
+
+    var veil = navVeil();
+    placeVeil(veil, lastNav);
+    var pending = 0;
+    function finished() {
+      if (token !== flipGen) return;
+      pending -= 1;
+      if (pending > 0) return;
+      nav.classList.remove("is-flipping");
+      if (veil.parentNode) veil.remove();
+    }
+    function track(anim) {
+      if (!anim) return;
+      pending += 1;
+      anim.onfinish = finished;
+      anim.oncancel = finished;
+    }
+
+    track(
+      playFlip(
+        veil,
+        firstNav,
+        lastNav,
+        { opacity: docked ? 1 : 0 },
+        { opacity: docked ? 0 : 1 }
+      )
+    );
+
+    for (i = 0; i < els.length; i++) {
+      els[i].style.transformOrigin = "center center";
+      track(playFlip(els[i], first[i], last[i]));
+    }
+
+    if (pending === 0) {
+      pending = 1;
+      finished();
     }
   }
 

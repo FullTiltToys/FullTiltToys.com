@@ -45,6 +45,7 @@ function paragraphs(product: Product) {
 export function ProductCard({ product }: { product: Product }) {
   const { card } = product;
   const shop = Boolean(card.cta.href);
+  const launchingSoon = card.cta.disabled;
 
   return (
     <li id={product.slug} className="h-full scroll-mt-24">
@@ -92,7 +93,15 @@ export function ProductCard({ product }: { product: Product }) {
           {card.specs.join(" · ")}
         </p>
         <div className="mt-auto pt-5">
-          {shop && card.cta.href ? (
+          {launchingSoon ? (
+            <button
+              type="button"
+              disabled
+              className="inline-flex h-10 w-full cursor-not-allowed items-center justify-center rounded-md bg-neutral-200 text-sm font-semibold text-neutral-500"
+            >
+              {card.cta.label}
+            </button>
+          ) : shop && card.cta.href ? (
             <a
               href={card.cta.href}
               target="_blank"
@@ -197,7 +206,7 @@ export function ProductDialog({ product }: { product: Product }) {
                 </ul>
               </div>
             ) : null}
-            {more.video ? (
+            {"video" in more && more.video ? (
               <video
                 src={more.video.src}
                 muted
@@ -210,7 +219,7 @@ export function ProductDialog({ product }: { product: Product }) {
                 className="w-full rounded-lg bg-neutral-50 object-contain"
               />
             ) : null}
-            {more.image ? (
+            {"image" in more && more.image ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={more.image.src}
@@ -252,7 +261,15 @@ export function ProductDialog({ product }: { product: Product }) {
         ) : null}
 
         <div className="mt-6 flex flex-wrap gap-2">
-          {product.cta.href ? (
+          {card.cta.disabled ? (
+            <button
+              type="button"
+              disabled
+              className="inline-flex h-10 cursor-not-allowed items-center justify-center rounded-md bg-neutral-200 px-4 text-sm font-semibold text-neutral-500"
+            >
+              {card.cta.label}
+            </button>
+          ) : product.cta.href ? (
             <a
               href={product.cta.href}
               target="_blank"

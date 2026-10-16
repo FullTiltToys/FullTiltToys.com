@@ -24,6 +24,10 @@ const upcoming = [
     name: "OTO",
     detail: "a desktop fidget toy, launching in October, 2026.",
   },
+  {
+    name: "OTO Stainless",
+    detail: "an executive desktop fidget toy.",
+  },
 ] as const;
 
 function TimelineList({
@@ -110,6 +114,11 @@ export default function Home() {
                               <li>
                                 <span className="font-semibold text-neutral-800">
                                   OTO Desktop Fidget Toy
+                                </span>
+                              </li>
+                              <li>
+                                <span className="font-semibold text-neutral-800">
+                                  OTO Stainless Executive Desktop Toy
                                 </span>
                               </li>
                               <li>

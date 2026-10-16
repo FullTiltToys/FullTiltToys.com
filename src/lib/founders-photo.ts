@@ -6,7 +6,6 @@ import { p4 } from "./founders-photo-4";
 import { p5 } from "./founders-photo-5";
 import { p6 } from "./founders-photo-6";
 import { p7 } from "./founders-photo-7";
-import { p8 } from "./founders-photo-8";
 
 export const foundersPhotoSrc =
-  "data:image/jpeg;base64," + p0 + p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8;
+  "data:image/jpeg;base64," + p0 + p1 + p2 + p3 + p4 + p5 + p6 + p7;

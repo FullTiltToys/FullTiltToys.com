@@ -15,6 +15,7 @@ export const products = [
       cta: {
         label: "Shop",
         href: "https://www.amazon.com/dp/B0FQ69JKDG?lv",
+        disabled: false,
       },
     },
     banner: "Available now",
@@ -109,6 +110,7 @@ export const products = [
       cta: {
         label: "Learn More",
         href: null,
+        disabled: false,
       },
     },
     banner: "Current Project",
@@ -190,6 +192,7 @@ export const products = [
       cta: {
         label: "Learn More",
         href: null,
+        disabled: false,
       },
     },
     banner: "Upcoming Project",
@@ -253,6 +256,75 @@ export const products = [
         src: "/products/oto.jpg",
         alt: "OTO Series 1 cars and box",
       },
+    },
+  },
+  {
+    slug: "oto-stainless",
+    name: "OTO Stainless | Executive Desktop Toy",
+    card: {
+      title: "OTO Stainless",
+      tagline: "A stainless steel executive desktop fidget toy",
+      badge: "Coming Soon",
+      specs: ["Stainless steel", "No batteries", "Desktop play"],
+      cta: {
+        label: "Launching Soon",
+        href: null,
+        disabled: true,
+      },
+    },
+    banner: "Upcoming Project",
+    bannerClass: "bg-[#a85a55] text-white",
+    factsLogo: {
+      src: "/logos/oto.png",
+      alt: "OTO",
+    },
+    facts: [
+      { label: "Stainless steel", icon: "user" },
+      { label: "No batteries", icon: "battery" },
+      { label: "No electronics", icon: "plug" },
+    ],
+    description:
+      "OTO Stainless is the executive edition of our curiously controllable desktop fidget toy. Machined in stainless steel, these vehicles are built as premium desktop companions you can fidget with or drive. OTO vehicles just may be the most maneuverable toy car ever made. No electronics or batteries. Just press play and take control. OTO vehicles are equipped with an instantaneous, automatic turning technology. The vehicles respond to your touch with smooth, rhythmic movement or lightning-fast turns. Stay tuned — OTO Stainless is on the way.",
+    photo: {
+      src: "/products/oto-stainless.png",
+      alt: "OTO Stainless steel executive desktop vehicles",
+      sizeClass: "h-full w-full",
+    },
+    cta: {
+      label: "Launching Soon",
+      href: null,
+      icon: "/logos/kickstarter.png",
+    },
+    more: {
+      highlights: [
+        {
+          title: "EXECUTIVE DESKTOP COMPANIONS",
+          text: "A stainless steel fidget you can keep on the desk — casually fidget while you work, or drive and take off your desk.",
+        },
+        {
+          title: "THE MOST MANEUVERABLE TOY CAR",
+          text: "OTO vehicles just may be the most maneuverable toy car ever made. Steer with a touch and take control.",
+        },
+        {
+          title: "STAINLESS STEEL BUILD",
+          text: "Premium stainless steel construction for an executive desktop toy with weight, finish, and presence.",
+        },
+        {
+          title: "NO ELECTRONICS OR BATTERIES",
+          text: "No electronics or batteries. Just press play and take control. You're the power!",
+        },
+        {
+          title: "INSTANTANEOUS AUTOMATIC TURNING",
+          text: "OTO vehicles are equipped with an instantaneous, automatic turning technology that responds the moment you do.",
+        },
+        {
+          title: "SMOOTH OR LIGHTNING-FAST",
+          text: "The vehicles respond to your touch with smooth, rhythmic movement or lightning-fast turns.",
+        },
+      ],
+      thanks:
+        "We want to thank our friends and family who helped us develop OTO. Stay tuned — OTO Stainless is on the way.",
+      links: [],
     },
   },
 ] as const;

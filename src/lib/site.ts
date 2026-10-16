@@ -1,3 +1,5 @@
+import { otoStainlessPhotoSrc } from "./oto-stainless-photo";
+
 export const site = {
   name: "Full Tilt Toys",
   email: "info@fulltilttoys.com",
@@ -286,7 +288,7 @@ export const products = [
     description:
       "OTO Stainless is the executive edition of our curiously controllable desktop fidget toy. Machined in stainless steel, these vehicles are built as premium desktop companions you can fidget with or drive. OTO vehicles just may be the most maneuverable toy car ever made. No electronics or batteries. Just press play and take control. OTO vehicles are equipped with an instantaneous, automatic turning technology. The vehicles respond to your touch with smooth, rhythmic movement or lightning-fast turns. Stay tuned — OTO Stainless is on the way.",
     photo: {
-      src: "/products/oto-stainless.png",
+      src: otoStainlessPhotoSrc,
       alt: "OTO Stainless steel executive desktop vehicles",
       sizeClass: "h-full w-full",
     },

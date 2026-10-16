@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SocialSection } from "@/components/social-section";
 import { WelcomeVideos } from "@/components/welcome-videos";
+import { foundersPhotoSrc } from "@/lib/founders-photo";
 
 const launched = [
   {
@@ -195,8 +196,10 @@ export default function Home() {
                     </p>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src="/founders.jpg"
+                      src={foundersPhotoSrc}
                       alt="Lance and Connor, founders of Full Tilt Toys"
+                      width={800}
+                      height={473}
                       className="mt-4 w-full rounded-lg object-cover"
                     />
                   </div>

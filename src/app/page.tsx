@@ -29,6 +29,10 @@ const upcoming = [
     name: "OTO Stainless",
     detail: "an executive desktop fidget toy.",
   },
+  {
+    name: "Non-Stop Tops",
+    detail: "an interactive spinning top that spins as long as you can.",
+  },
 ] as const;
 
 function TimelineList({
@@ -123,8 +127,20 @@ export default function Home() {
                                 </span>
                               </li>
                               <li>
-                                <span className="italic text-neutral-500">
+                                <span className="font-semibold italic text-neutral-500">
                                   Future Toys...
+                                </span>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <span className="font-semibold text-neutral-900">
+                              NST
+                            </span>
+                            <ul>
+                              <li>
+                                <span className="font-semibold text-neutral-800">
+                                  Non-Stop Tops
                                 </span>
                               </li>
                             </ul>

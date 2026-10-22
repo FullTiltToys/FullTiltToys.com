@@ -18,9 +18,11 @@ export function ProductList() {
           ))}
         </ul>
       </div>
-      {products.map((product) => (
-        <ProductDialog key={`${product.slug}-dialog`} product={product} />
-      ))}
+      {products
+        .filter((product) => !product.card.cta.disabled)
+        .map((product) => (
+          <ProductDialog key={`${product.slug}-dialog`} product={product} />
+        ))}
       <ProductGridScript />
     </section>
   );

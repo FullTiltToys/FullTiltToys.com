@@ -220,45 +220,6 @@ export const products = [
       href: null,
       icon: "/logos/kickstarter.png",
     },
-    more: {
-      highlights: [
-        {
-          title: "PLAYFUL DESKTOP COMPANIONS",
-          text: "Casually fidget while working at your desk or drive — and take off your desk!",
-        },
-        {
-          title: "THE MOST MANEUVERABLE TOY CAR",
-          text: "OTO vehicles just may be the most maneuverable toy car ever made. Steer with a touch and take control.",
-        },
-        {
-          title: "NO ELECTRONICS OR BATTERIES",
-          text: "No electronics or batteries. Just press play and take control. You're the power!",
-        },
-        {
-          title: "INSTANTANEOUS AUTOMATIC TURNING",
-          text: "OTO vehicles are equipped with an instantaneous, automatic turning technology that responds the moment you do.",
-        },
-        {
-          title: "SMOOTH OR LIGHTNING-FAST",
-          text: "The vehicles respond to your touch with smooth, rhythmic movement or lightning-fast turns!",
-        },
-        {
-          title: "FUTURISTIC DESKTOP EXPLORERS",
-          text: "Destined for desktop exploration, OTO vehicles show off unique sci-fi Rover designs.",
-        },
-      ],
-      thanks:
-        "We want to thank our friends and family who helped us develop OTO. Stay tuned — OTO vehicles are on the way!",
-      links: [],
-      video: {
-        src: "/videos/oto.mp4",
-        label: "OTO",
-      },
-      image: {
-        src: "/products/oto.jpg",
-        alt: "OTO Series 1 cars and box",
-      },
-    },
   },
   {
     slug: "oto-stainless",
@@ -296,37 +257,6 @@ export const products = [
       label: "Coming Soon",
       href: null,
       icon: "/logos/kickstarter.png",
-    },
-    more: {
-      highlights: [
-        {
-          title: "EXECUTIVE DESKTOP COMPANIONS",
-          text: "A stainless steel fidget you can keep on the desk — casually fidget while you work, or drive and take off your desk.",
-        },
-        {
-          title: "THE MOST MANEUVERABLE TOY CAR",
-          text: "OTO vehicles just may be the most maneuverable toy car ever made. Steer with a touch and take control.",
-        },
-        {
-          title: "STAINLESS STEEL BUILD",
-          text: "Premium stainless steel construction for an executive desktop toy with weight, finish, and presence.",
-        },
-        {
-          title: "NO ELECTRONICS OR BATTERIES",
-          text: "No electronics or batteries. Just press play and take control. You're the power!",
-        },
-        {
-          title: "INSTANTANEOUS AUTOMATIC TURNING",
-          text: "OTO vehicles are equipped with an instantaneous, automatic turning technology that responds the moment you do.",
-        },
-        {
-          title: "SMOOTH OR LIGHTNING-FAST",
-          text: "The vehicles respond to your touch with smooth, rhythmic movement or lightning-fast turns.",
-        },
-      ],
-      thanks:
-        "We want to thank our friends and family who helped us develop OTO. Stay tuned — OTO Stainless is on the way.",
-      links: [],
     },
   },
 ] as const;

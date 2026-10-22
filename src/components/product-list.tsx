@@ -1,5 +1,9 @@
 import { ProductGridScript } from "@/components/product-grid-script";
-import { ProductCard, ProductDialog } from "@/components/product-profile";
+import {
+  canOpenProductDetails,
+  ProductCard,
+  ProductDialog,
+} from "@/components/product-profile";
 import { products } from "@/lib/site";
 
 export function ProductList() {
@@ -18,11 +22,9 @@ export function ProductList() {
           ))}
         </ul>
       </div>
-      {products
-        .filter((product) => !product.card.cta.disabled)
-        .map((product) => (
-          <ProductDialog key={`${product.slug}-dialog`} product={product} />
-        ))}
+      {products.filter(canOpenProductDetails).map((product) => (
+        <ProductDialog key={`${product.slug}-dialog`} product={product} />
+      ))}
       <ProductGridScript />
     </section>
   );

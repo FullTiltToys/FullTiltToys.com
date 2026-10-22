@@ -21,7 +21,11 @@ export const productGridScript = `
     var opener = target.closest("[data-product-open]");
     if (opener) {
       event.preventDefault();
-      openDialog(document.getElementById("product-dialog-" + opener.getAttribute("data-product-open")));
+      var slug = opener.getAttribute("data-product-open");
+      if (!slug || slug === "oto" || slug === "oto-stainless") return;
+      var dialog = document.getElementById("product-dialog-" + slug);
+      if (!dialog) return;
+      openDialog(dialog);
       return;
     }
     var closer = target.closest("[data-product-close]");

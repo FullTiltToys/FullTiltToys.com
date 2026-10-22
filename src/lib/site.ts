@@ -192,9 +192,9 @@ export const products = [
       badge: "Coming Soon",
       specs: ["No batteries", "No electronics", "Desktop play"],
       cta: {
-        label: "Learn More",
+        label: "Coming Soon",
         href: null,
-        disabled: false,
+        disabled: true,
       },
     },
     banner: "Upcoming Project",
@@ -216,8 +216,8 @@ export const products = [
       sizeClass: "h-full w-full",
     },
     cta: {
-      label: "Follow",
-      href: "https://www.kickstarter.com/projects/fulltilttoys/oto-the-fidget-toy-you-drive?ref=em6ni9",
+      label: "Coming Soon",
+      href: null,
       icon: "/logos/kickstarter.png",
     },
     more: {
@@ -269,7 +269,7 @@ export const products = [
       badge: "Coming Soon",
       specs: ["Stainless steel", "No batteries", "Desktop play"],
       cta: {
-        label: "Launching Soon",
+        label: "Coming Soon",
         href: null,
         disabled: true,
       },
@@ -293,7 +293,7 @@ export const products = [
       sizeClass: "h-full w-full",
     },
     cta: {
-      label: "Launching Soon",
+      label: "Coming Soon",
       href: null,
       icon: "/logos/kickstarter.png",
     },

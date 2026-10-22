@@ -42,49 +42,81 @@ function paragraphs(product: Product) {
     : [product.description];
 }
 
+function ProductPhoto({
+  product,
+  badgeClass,
+}: {
+  product: Product;
+  badgeClass: string;
+}) {
+  const { card } = product;
+
+  return (
+    <>
+      <span
+        className={`absolute top-3 left-3 z-10 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-wide uppercase ${badgeClass}`}
+      >
+        {card.badge}
+      </span>
+      <span className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-lg bg-neutral-50 p-4">
+        {product.photo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={product.photo.src}
+            alt={product.photo.alt}
+            className="product-photo h-full w-full object-contain"
+          />
+        ) : (
+          <span className="sr-only">{product.name} photo coming soon</span>
+        )}
+      </span>
+    </>
+  );
+}
+
 export function ProductCard({ product }: { product: Product }) {
   const { card } = product;
   const shop = Boolean(card.cta.href);
-  const launchingSoon = card.cta.disabled;
+  const comingSoon = card.cta.disabled;
 
   return (
     <li id={product.slug} className="h-full scroll-mt-24">
       <article className="product-card flex h-full flex-col rounded-xl border border-neutral-200 bg-white p-5 shadow-sm">
-        <button
-          type="button"
-          data-product-open={product.slug}
-          className="group/photo relative w-full cursor-pointer text-left"
-        >
-          <span
-            className={`absolute top-3 left-3 z-10 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-wide uppercase ${
-              shop
-                ? "bg-[#325d85] text-white"
-                : "border border-[#325d85] bg-white text-[#325d85]"
-            }`}
-          >
-            {card.badge}
-          </span>
-          <span className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-lg bg-neutral-50 p-4">
-            {product.photo ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={product.photo.src}
-                alt={product.photo.alt}
-                className="product-photo h-full w-full object-contain"
-              />
-            ) : (
-              <span className="sr-only">{product.name} photo coming soon</span>
-            )}
-          </span>
-        </button>
-        <h3 className="mt-4 text-lg font-bold tracking-tight text-neutral-900">
+        {comingSoon ? (
+          <div className="relative w-full text-left">
+            <ProductPhoto
+              product={product}
+              badgeClass="border border-neutral-300 bg-neutral-100 text-neutral-500"
+            />
+          </div>
+        ) : (
           <button
             type="button"
             data-product-open={product.slug}
-            className="cursor-pointer text-left hover:text-[#325d85]"
+            className="group/photo relative w-full cursor-pointer text-left"
           >
-            {card.title}
+            <ProductPhoto
+              product={product}
+              badgeClass={
+                shop
+                  ? "bg-[#325d85] text-white"
+                  : "border border-[#325d85] bg-white text-[#325d85]"
+              }
+            />
           </button>
+        )}
+        <h3 className="mt-4 text-lg font-bold tracking-tight text-neutral-900">
+          {comingSoon ? (
+            card.title
+          ) : (
+            <button
+              type="button"
+              data-product-open={product.slug}
+              className="cursor-pointer text-left hover:text-[#325d85]"
+            >
+              {card.title}
+            </button>
+          )}
         </h3>
         <p className="mt-1 line-clamp-1 text-sm leading-6 text-neutral-600">
           {card.tagline}
@@ -93,10 +125,11 @@ export function ProductCard({ product }: { product: Product }) {
           {card.specs.join(" · ")}
         </p>
         <div className="mt-auto pt-5">
-          {launchingSoon ? (
+          {comingSoon ? (
             <button
               type="button"
               disabled
+              aria-disabled="true"
               className="inline-flex h-10 w-full cursor-not-allowed items-center justify-center rounded-md bg-neutral-200 text-sm font-semibold text-neutral-500"
             >
               {card.cta.label}

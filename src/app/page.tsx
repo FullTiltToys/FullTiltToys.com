@@ -127,7 +127,7 @@ export default function Home() {
                                 </span>
                               </li>
                               <li>
-                                <span className="font-semibold italic text-neutral-500">
+                                <span className="italic text-neutral-500">
                                   Future Toys...
                                 </span>
                               </li>

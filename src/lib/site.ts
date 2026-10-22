@@ -1,4 +1,5 @@
 import { nonStopTopsPhotoSrc } from "./non-stop-tops-photo";
+import { nonStopTopsSteelPhotoSrc } from "./non-stop-tops-steel-photo";
 import { otoStainlessPhotoSrc } from "./oto-stainless-photo";
 
 export const site = {
@@ -9,9 +10,9 @@ export const site = {
 export const products = [
   {
     slug: "doodle-disaster",
-    name: "Doodle Disaster",
+    name: "Doodle Disaster | The Art of Miscommunication",
     card: {
-      title: "Doodle Disaster",
+      title: "Doodle Disaster | The Art of Miscommunication",
       tagline: "A party drawing game of hilarious miscommunication",
       badge: "Available Now",
       specs: ["2–6 players", "Ages 12+", "Under 45 min"],
@@ -104,9 +105,9 @@ export const products = [
   },
   {
     slug: "bulldozer",
-    name: "Bulldozer | It's Time To Play Dirty!",
+    name: "Bulldozer | It's Time to Play Dirty",
     card: {
-      title: "Bulldozer",
+      title: "Bulldozer | It's Time to Play Dirty",
       tagline: "A 2-player strategy game of rocks, dice, and dynamite",
       badge: "Coming Soon",
       specs: ["2 players", "Ages 7+", "Under 45 min"],
@@ -188,7 +189,7 @@ export const products = [
     slug: "oto",
     name: "OTO | Curiously Controllable",
     card: {
-      title: "OTO",
+      title: "OTO | Curiously Controllable",
       tagline: "A curiously controllable desktop fidget toy vehicle",
       badge: "Coming Soon",
       specs: ["No batteries", "No electronics", "Desktop play"],
@@ -262,9 +263,9 @@ export const products = [
   },
   {
     slug: "non-stop-tops",
-    name: "Non-Stop Tops",
+    name: "NST | Non-Stop Tops",
     card: {
-      title: "Non-Stop Tops",
+      title: "NST | Non-Stop Tops",
       tagline: "An interactive spinning top that spins as long as you can",
       badge: "Coming Soon",
       specs: ["Interactive spin", "Keep it going", "Desktop play"],
@@ -290,6 +291,44 @@ export const products = [
     photo: {
       src: nonStopTopsPhotoSrc,
       alt: "Non-Stop Tops in blue, red, and green",
+      sizeClass: "h-full w-full",
+    },
+    cta: {
+      label: "Coming Soon",
+      href: null,
+      icon: "/logos/nst.png",
+    },
+  },
+  {
+    slug: "non-stop-tops-steel",
+    name: "NST STEEL | Non-Stop Tops Metal Edition",
+    card: {
+      title: "NST STEEL | Non-Stop Tops Metal Edition",
+      tagline: "A metal edition spinning top that spins as long as you can",
+      badge: "Coming Soon",
+      specs: ["Metal edition", "Interactive spin", "Desktop play"],
+      cta: {
+        label: "Coming Soon",
+        href: null,
+        disabled: true,
+      },
+    },
+    banner: "Upcoming Project",
+    bannerClass: "bg-[#a85a55] text-white",
+    factsLogo: {
+      src: "/logos/nst.png",
+      alt: "NST",
+    },
+    facts: [
+      { label: "Metal edition", icon: "user" },
+      { label: "Interactive spin", icon: "timer" },
+      { label: "Spins as long as you can", icon: "clock" },
+    ],
+    description:
+      "NST STEEL is the metal edition of Non-Stop Tops — interactive spinning tops that spin as long as you can. Stay tuned — NST STEEL is on the way.",
+    photo: {
+      src: nonStopTopsSteelPhotoSrc,
+      alt: "NST STEEL Non-Stop Tops metal edition in three shapes",
       sizeClass: "h-full w-full",
     },
     cta: {

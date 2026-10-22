@@ -3,6 +3,13 @@ import { ArrowUpRight } from "lucide-react";
 import { products } from "@/lib/site";
 
 type Product = (typeof products)[number];
+type ProductWithDetails = Extract<Product, { more: object }>;
+
+export function canOpenProductDetails(
+  product: Product,
+): product is ProductWithDetails {
+  return !product.card.cta.disabled && "more" in product;
+}
 
 function LinkIcon({ name }: { name: "bgg" | "youtube" | "amazon" }) {
   if (name === "amazon") {
@@ -77,19 +84,12 @@ function ProductPhoto({
 export function ProductCard({ product }: { product: Product }) {
   const { card } = product;
   const shop = Boolean(card.cta.href);
-  const comingSoon = card.cta.disabled;
+  const canOpen = canOpenProductDetails(product);
 
   return (
     <li id={product.slug} className="h-full scroll-mt-24">
       <article className="product-card flex h-full flex-col rounded-xl border border-neutral-200 bg-white p-5 shadow-sm">
-        {comingSoon ? (
-          <div className="relative w-full text-left">
-            <ProductPhoto
-              product={product}
-              badgeClass="border border-neutral-300 bg-neutral-100 text-neutral-500"
-            />
-          </div>
-        ) : (
+        {canOpen ? (
           <button
             type="button"
             data-product-open={product.slug}
@@ -104,11 +104,20 @@ export function ProductCard({ product }: { product: Product }) {
               }
             />
           </button>
+        ) : (
+          <div className="relative w-full cursor-default text-left">
+            <ProductPhoto
+              product={product}
+              badgeClass={
+                shop
+                  ? "bg-[#325d85] text-white"
+                  : "border border-neutral-300 bg-neutral-100 text-neutral-500"
+              }
+            />
+          </div>
         )}
         <h3 className="mt-4 text-lg font-bold tracking-tight text-neutral-900">
-          {comingSoon ? (
-            card.title
-          ) : (
+          {canOpen ? (
             <button
               type="button"
               data-product-open={product.slug}
@@ -116,6 +125,8 @@ export function ProductCard({ product }: { product: Product }) {
             >
               {card.title}
             </button>
+          ) : (
+            card.title
           )}
         </h3>
         <p className="mt-1 line-clamp-1 text-sm leading-6 text-neutral-600">
@@ -125,16 +136,7 @@ export function ProductCard({ product }: { product: Product }) {
           {card.specs.join(" · ")}
         </p>
         <div className="mt-auto pt-5">
-          {comingSoon ? (
-            <button
-              type="button"
-              disabled
-              aria-disabled="true"
-              className="inline-flex h-10 w-full cursor-not-allowed items-center justify-center rounded-md bg-neutral-200 text-sm font-semibold text-neutral-500"
-            >
-              {card.cta.label}
-            </button>
-          ) : shop && card.cta.href ? (
+          {shop && card.cta.href ? (
             <a
               href={card.cta.href}
               target="_blank"
@@ -144,11 +146,20 @@ export function ProductCard({ product }: { product: Product }) {
               {card.cta.label}
               <ArrowUpRight className="size-4" />
             </a>
-          ) : (
+          ) : canOpen ? (
             <button
               type="button"
               data-product-open={product.slug}
               className="product-card-btn inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md border border-[#325d85] bg-white text-sm font-semibold text-[#325d85]"
+            >
+              {card.cta.label}
+            </button>
+          ) : (
+            <button
+              type="button"
+              disabled
+              aria-disabled="true"
+              className="inline-flex h-10 w-full cursor-not-allowed items-center justify-center rounded-md bg-neutral-200 text-sm font-semibold text-neutral-500"
             >
               {card.cta.label}
             </button>
@@ -159,7 +170,7 @@ export function ProductCard({ product }: { product: Product }) {
   );
 }
 
-export function ProductDialog({ product }: { product: Product }) {
+export function ProductDialog({ product }: { product: ProductWithDetails }) {
   const more = product.more;
   const { card } = product;
 
@@ -309,7 +320,7 @@ export function ProductDialog({ product }: { product: Product }) {
               rel="noopener noreferrer"
               className="inline-flex h-10 items-center justify-center gap-1.5 rounded-md bg-[#325d85] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#274a6c]"
             >
-              {product.cta.label === "Get It" ? "Shop" : product.cta.label}
+              Shop
               <ArrowUpRight className="size-4" />
             </a>
           ) : null}

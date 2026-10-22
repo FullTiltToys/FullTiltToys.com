@@ -10,6 +10,7 @@ export const WHOLESALE_PRODUCTS = [
   { id: "bulldozer", label: "Bulldozer" },
   { id: "oto", label: "OTO" },
   { id: "oto-stainless", label: "OTO Stainless" },
+  { id: "non-stop-tops", label: "Non-Stop Tops" },
   { id: "other", label: "Other" },
 ] as const;
 

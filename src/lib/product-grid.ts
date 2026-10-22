@@ -22,7 +22,13 @@ export const productGridScript = `
     if (opener) {
       event.preventDefault();
       var slug = opener.getAttribute("data-product-open");
-      if (!slug || slug === "oto" || slug === "oto-stainless") return;
+      if (
+        !slug ||
+        slug === "oto" ||
+        slug === "oto-stainless" ||
+        slug === "non-stop-tops"
+      )
+        return;
       var dialog = document.getElementById("product-dialog-" + slug);
       if (!dialog) return;
       openDialog(dialog);

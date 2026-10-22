@@ -1,3 +1,4 @@
+import { nonStopTopsPhotoSrc } from "./non-stop-tops-photo";
 import { otoStainlessPhotoSrc } from "./oto-stainless-photo";
 
 export const site = {
@@ -257,6 +258,44 @@ export const products = [
       label: "Coming Soon",
       href: null,
       icon: "/logos/kickstarter.png",
+    },
+  },
+  {
+    slug: "non-stop-tops",
+    name: "Non-Stop Tops",
+    card: {
+      title: "Non-Stop Tops",
+      tagline: "An interactive spinning top that spins as long as you can",
+      badge: "Coming Soon",
+      specs: ["Interactive spin", "Keep it going", "Desktop play"],
+      cta: {
+        label: "Coming Soon",
+        href: null,
+        disabled: true,
+      },
+    },
+    banner: "Upcoming Project",
+    bannerClass: "bg-[#a85a55] text-white",
+    factsLogo: {
+      src: "/logos/nst.png",
+      alt: "NST",
+    },
+    facts: [
+      { label: "Interactive spin", icon: "timer" },
+      { label: "Keep it going", icon: "clock" },
+      { label: "Spins as long as you can", icon: "user" },
+    ],
+    description:
+      "Non-Stop Tops are interactive spinning tops that spin as long as you can. Stay tuned — Non-Stop Tops are on the way.",
+    photo: {
+      src: nonStopTopsPhotoSrc,
+      alt: "Non-Stop Tops in blue, red, and green",
+      sizeClass: "h-full w-full",
+    },
+    cta: {
+      label: "Coming Soon",
+      href: null,
+      icon: "/logos/nst.png",
     },
   },
 ] as const;

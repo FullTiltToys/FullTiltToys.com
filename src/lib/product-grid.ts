@@ -26,7 +26,8 @@ export const productGridScript = `
         !slug ||
         slug === "oto" ||
         slug === "oto-stainless" ||
-        slug === "non-stop-tops"
+        slug === "non-stop-tops" ||
+        slug === "non-stop-tops-steel"
       )
         return;
       var dialog = document.getElementById("product-dialog-" + slug);

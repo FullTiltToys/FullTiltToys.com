@@ -8,21 +8,20 @@ import { SiteHeader } from "@/components/site-header";
 import { SocialSection } from "@/components/social-section";
 import { WelcomeVideos } from "@/components/welcome-videos";
 import { foundersPhotoSrc } from "@/lib/founders-photo";
-
 const launched = [
   {
-    name: "Doodle Disaster",
+    name: "Doodle Disaster | The Art of Miscommunication",
     detail: "our first game, launched July 8, 2025.",
   },
   {
-    name: "Bulldozer: It’s Time to Play Dirty",
+    name: "Bulldozer | It's Time to Play Dirty",
     detail: "launched March 2, 2026.",
   },
 ] as const;
 
 const upcoming = [
   {
-    name: "OTO",
+    name: "OTO | Curiously Controllable",
     detail: "a desktop fidget toy, launching in October, 2026.",
   },
   {
@@ -30,8 +29,12 @@ const upcoming = [
     detail: "an executive desktop fidget toy.",
   },
   {
-    name: "Non-Stop Tops",
+    name: "NST | Non-Stop Tops",
     detail: "an interactive spinning top that spins as long as you can.",
+  },
+  {
+    name: "NST STEEL | Non-Stop Tops Metal Edition",
+    detail: "a metal edition spinning top that spins as long as you can.",
   },
 ] as const;
 
@@ -118,7 +121,7 @@ export default function Home() {
                             <ul>
                               <li>
                                 <span className="font-semibold text-neutral-800">
-                                  OTO Desktop Fidget Toy
+                                  OTO | Curiously Controllable
                                 </span>
                               </li>
                               <li>
@@ -140,7 +143,12 @@ export default function Home() {
                             <ul>
                               <li>
                                 <span className="font-semibold text-neutral-800">
-                                  Non-Stop Tops
+                                  NST | Non-Stop Tops
+                                </span>
+                              </li>
+                              <li>
+                                <span className="font-semibold text-neutral-800">
+                                  NST STEEL | Non-Stop Tops Metal Edition
                                 </span>
                               </li>
                             </ul>
@@ -151,9 +159,9 @@ export default function Home() {
                             </span>
                             <ul>
                               <li>
-                                Doodle Disaster: The Art of Miscommunication
+                                Doodle Disaster | The Art of Miscommunication
                               </li>
-                              <li>Bulldozer: It’s Time to Play Dirty</li>
+                              <li>Bulldozer | It's Time to Play Dirty</li>
                               <li>
                                 <span className="italic text-neutral-500">
                                   Future Games...

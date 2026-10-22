@@ -6,11 +6,12 @@ export const WHOLESALE_BUSINESS_TYPES = [
 ] as const;
 
 export const WHOLESALE_PRODUCTS = [
-  { id: "doodle-disaster", label: "Doodle Disaster" },
-  { id: "bulldozer", label: "Bulldozer" },
-  { id: "oto", label: "OTO" },
+  { id: "doodle-disaster", label: "Doodle Disaster | The Art of Miscommunication" },
+  { id: "bulldozer", label: "Bulldozer | It's Time to Play Dirty" },
+  { id: "oto", label: "OTO | Curiously Controllable" },
   { id: "oto-stainless", label: "OTO Stainless" },
-  { id: "non-stop-tops", label: "Non-Stop Tops" },
+  { id: "non-stop-tops", label: "NST | Non-Stop Tops" },
+  { id: "non-stop-tops-steel", label: "NST STEEL | Non-Stop Tops Metal Edition" },
   { id: "other", label: "Other" },
 ] as const;
 

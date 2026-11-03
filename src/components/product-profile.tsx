@@ -49,6 +49,16 @@ function paragraphs(product: Product) {
     : [product.description];
 }
 
+const teaserSlugs = new Set([
+  "oto-stainless",
+  "non-stop-tops",
+  "non-stop-tops-steel",
+]);
+
+function isTeaserProduct(product: Product) {
+  return teaserSlugs.has(product.slug);
+}
+
 function ProductPhoto({
   product,
   badgeClass,
@@ -57,6 +67,7 @@ function ProductPhoto({
   badgeClass: string;
 }) {
   const { card } = product;
+  const teaser = isTeaserProduct(product);
 
   return (
     <>
@@ -70,11 +81,11 @@ function ProductPhoto({
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={product.photo.src}
-            alt={product.photo.alt}
+            alt={teaser ? "Upcoming product" : product.photo.alt}
             className="product-photo h-full w-full object-contain"
           />
         ) : (
-          <span className="sr-only">{product.name} photo coming soon</span>
+          <span className="sr-only">Upcoming product photo</span>
         )}
       </span>
     </>
@@ -85,10 +96,13 @@ export function ProductCard({ product }: { product: Product }) {
   const { card } = product;
   const shop = Boolean(card.cta.href);
   const canOpen = canOpenProductDetails(product);
+  const teaser = isTeaserProduct(product);
 
   return (
     <li id={product.slug} className="h-full scroll-mt-24">
-      <article className="product-card flex h-full flex-col rounded-xl border border-neutral-200 bg-white p-5 shadow-sm">
+      <article
+        className={`product-card flex h-full flex-col rounded-xl border border-neutral-200 bg-white p-5 shadow-sm${teaser ? " product-teaser" : ""}`}
+      >
         {canOpen ? (
           <button
             type="button"
@@ -116,7 +130,13 @@ export function ProductCard({ product }: { product: Product }) {
             />
           </div>
         )}
-        <h3 className="mt-4 text-lg font-bold tracking-tight text-neutral-900">
+        {teaser ? (
+          <span className="sr-only">Upcoming product, coming soon</span>
+        ) : null}
+        <h3
+          className={`mt-4 text-lg font-bold tracking-tight text-neutral-900${teaser ? " product-teaser-copy" : ""}`}
+          aria-hidden={teaser ? true : undefined}
+        >
           {canOpen ? (
             <button
               type="button"
@@ -129,10 +149,16 @@ export function ProductCard({ product }: { product: Product }) {
             card.title
           )}
         </h3>
-        <p className="mt-1 line-clamp-1 text-sm leading-6 text-neutral-600">
+        <p
+          className={`mt-1 line-clamp-1 text-sm leading-6 text-neutral-600${teaser ? " product-teaser-copy" : ""}`}
+          aria-hidden={teaser ? true : undefined}
+        >
           {card.tagline}
         </p>
-        <p className="mt-3 text-xs tracking-wide text-neutral-500">
+        <p
+          className={`mt-3 text-xs tracking-wide text-neutral-500${teaser ? " product-teaser-copy" : ""}`}
+          aria-hidden={teaser ? true : undefined}
+        >
           {card.specs.join(" · ")}
         </p>
         <div className="mt-auto pt-5">

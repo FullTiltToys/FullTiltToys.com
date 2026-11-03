@@ -1,0 +1,9 @@
+export const fttIconPng64c =
+  "4YqgXr24SQSgaB2CxnE2vL4XlQYQQkxn7Zr773n6sfpiSvUVwO26ftXXe9WnxYRURCdOn9u+/3gsHDSGtaIrifR3Fk0bNmTQzTnf" +
+  "be71bXs+/ss/2wbEwq78tp1f80yj3+83zIS3t8eiIqVa91FEsMSuRHjDlj1GiFAQMZNzRg+tWP7ENJZSJtfZldy042BP4KdEOjv7" +
+  "4VENdeOLeXx/ALDnWMwcDTMR7j7UevD4+UiozLAQYTabXb1oRjAYKJZ3XPt+Zcf+i1dS5T4lAkYk6Mc1S2Z/qXtid34Zy/rVm/sC" +
+  "5eVuFkumc1+tqZozbWKJ0KmI/nX+0pY9x2KRoGNYK0okM0tmP/RA1VBXkS8JwLWQV3cePH2pI1CmRYQBFfLaJU2IVLq43/j6HssW" +
+  "hYgIWdsMrww/t2DG7YbOOwJwhWxrv/ran4/Go2EB8Pt0Imm1TB9fM+a+YqHTFfjQsb+//9ez8WhQAHxapzPWypZpsWiE72AXrvtl" +
+  "Qrx+887znyfi0YBhcQwPjJS9sKhJRKCw7wIhpdKZH728K5OzRVIAmM7m66uHLWia5GblfvsA9uNNPTMfOnbSdtgtaWzbuXfwgOpR" +
+  "I4r5rsuVylgftp7WWrl/y9v2+AeGDxtSeYcPQfB/9anB/+thjO5fN75xv4yAfYkhhrlX0XXnzOh97OEBeAAegAfgAXgAHoAH4AF4" +
+  "AB6AB+AB9K/9B27QlQkuQVPbAAAAAElFTkSuQmCC";

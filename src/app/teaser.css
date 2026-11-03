@@ -1,0 +1,12 @@
+.product-teaser .product-photo {
+  filter: blur(18px);
+  transform: scale(1.12);
+  pointer-events: none;
+  user-select: none;
+}
+
+.product-teaser .product-teaser-copy {
+  filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+}

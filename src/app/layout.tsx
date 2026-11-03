@@ -5,6 +5,7 @@ import { SiteChromeScript } from "@/components/site-chrome-script";
 import { WholesaleDialog } from "@/components/wholesale-dialog";
 
 import "./globals.css";
+import "./teaser.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

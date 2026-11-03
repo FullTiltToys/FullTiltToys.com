@@ -27,26 +27,33 @@ const upcoming = [
   {
     name: "OTO Stainless",
     detail: "an executive desktop fidget toy.",
+    teaser: true,
   },
   {
     name: "NST | Non-Stop Tops",
     detail: "an interactive spinning top that spins as long as you can.",
+    teaser: true,
   },
   {
     name: "NST STEEL | Non-Stop Tops Metal Edition",
     detail: "a metal edition spinning top that spins as long as you can.",
+    teaser: true,
   },
 ] as const;
 
 function TimelineList({
   items,
 }: {
-  items: readonly { name: string; detail: string }[];
+  items: readonly { name: string; detail: string; teaser?: boolean }[];
 }) {
   return (
     <ul className="mt-2 space-y-2 text-base leading-7 text-neutral-600">
       {items.map((item) => (
-        <li key={item.name}>
+        <li
+          key={item.name}
+          className={item.teaser ? "product-teaser-copy" : undefined}
+          aria-hidden={item.teaser || undefined}
+        >
           <span className="font-semibold text-neutral-800">{item.name}</span>
           {" - "}
           {item.detail}
@@ -125,7 +132,10 @@ export default function Home() {
                                 </span>
                               </li>
                               <li>
-                                <span className="font-semibold text-neutral-800">
+                                <span
+                                  className="product-teaser-copy font-semibold text-neutral-800"
+                                  aria-hidden
+                                >
                                   OTO Stainless Executive Desktop Toy
                                 </span>
                               </li>
@@ -137,17 +147,26 @@ export default function Home() {
                             </ul>
                           </li>
                           <li>
-                            <span className="font-semibold text-neutral-900">
+                            <span
+                              className="product-teaser-copy font-semibold text-neutral-900"
+                              aria-hidden
+                            >
                               NST
                             </span>
                             <ul>
                               <li>
-                                <span className="font-semibold text-neutral-800">
+                                <span
+                                  className="product-teaser-copy font-semibold text-neutral-800"
+                                  aria-hidden
+                                >
                                   NST | Non-Stop Tops
                                 </span>
                               </li>
                               <li>
-                                <span className="font-semibold text-neutral-800">
+                                <span
+                                  className="product-teaser-copy font-semibold text-neutral-800"
+                                  aria-hidden
+                                >
                                   NST STEEL | Non-Stop Tops Metal Edition
                                 </span>
                               </li>

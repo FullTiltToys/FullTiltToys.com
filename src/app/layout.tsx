@@ -27,6 +27,13 @@ export const metadata: Metadata = {
   title: "Full Tilt Toys",
   description:
     "Family-owned toy and game company. Doodle Disaster, Bulldozer, and OTO.",
+  icons: {
+    icon: [
+      { url: "/icon", type: "image/png", sizes: "64x64" },
+      { url: "/favicon.ico", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

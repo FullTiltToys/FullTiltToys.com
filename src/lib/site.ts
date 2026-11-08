@@ -109,15 +109,15 @@ export const products = [
     card: {
       title: "Bulldozer | It's Time to Play Dirty",
       tagline: "A 2-player strategy game of rocks, dice, and dynamite",
-      badge: "Coming Soon",
+      badge: "Available Now",
       specs: ["2 players", "Ages 7+", "Under 45 min"],
       cta: {
-        label: "Learn More",
-        href: null,
+        label: "Shop",
+        href: "https://www.amazon.com/dp/B0GG5LZDVD?th=1",
         disabled: false,
       },
     },
-    banner: "Current Project",
+    banner: "Available now",
     bannerClass: "bg-[#c48a2a] text-white",
     factsLogo: {
       src: "/logos/bulldozer-games.png",
@@ -131,7 +131,7 @@ export const products = [
     ],
     description: [
       "Roll the dice and use your trusty bulldozers to move rocks and launch dynamite. Clear your rocks by pushing them into your pit or 'play dirty' and knock your rocks onto your opponent's side. Things tend to escalate quickly when there's dynamite lying around!",
-      "Bulldozer just completed a successful campaign on Kickstarter and will be available for sale before 2027 in both standard and Deluxe editions!",
+      "Bulldozer just completed a successful campaign on Kickstarter and is now available on Amazon in both standard and Deluxe editions!",
     ],
     photo: {
       src: "/products/bulldozer-art.png",
@@ -139,8 +139,8 @@ export const products = [
       sizeClass: "h-full w-full",
     },
     cta: {
-      label: "Coming soon to Amazon",
-      href: null,
+      label: "Get It",
+      href: "https://www.amazon.com/dp/B0GG5LZDVD?th=1",
       icon: "/logos/amazon-on-dark.png",
     },
     more: {
@@ -173,6 +173,11 @@ export const products = [
           label: "Bulldozer BGG Listing",
           href: "https://boardgamegeek.com/boardgame/466340/bulldozer",
           icon: "bgg",
+        },
+        {
+          label: "Buy now on Amazon",
+          href: "https://www.amazon.com/dp/B0GG5LZDVD?th=1",
+          icon: "amazon",
         },
       ],
       video: {

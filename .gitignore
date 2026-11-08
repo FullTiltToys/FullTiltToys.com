@@ -35,9 +35,10 @@ yarn-error.log*
 .env*
 !.env.example
 
-# local subscribe fallback (dev only)
+# local subscribe / wholesale fallbacks (dev only; never commit)
 /data/subscribers.local.json
 /data/wholesale.local.json
+data/wholesale.local.json
 
 # vercel
 .vercel

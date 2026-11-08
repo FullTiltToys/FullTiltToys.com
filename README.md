@@ -11,18 +11,18 @@ npm run dev
 
 ## Wholesale inquiries
 
-The Wholesale button emails **Connor@fulltilttoys.com** through [Resend](https://resend.com). Reply-To is the shop’s email so you can answer from your inbox. A hidden honeypot field drops spam bots.
+The Wholesale button emails **Connor@fulltilttoys.com** through [Resend](https://resend.com). Reply-To is the shop’s email so you can answer from your inbox. A hidden honeypot field drops spam bots. The thank-you message only appears after Resend accepts the send.
 
 1. Create a Resend account and add an API key.
-2. Verify the `fulltilttoys.com` domain in Resend when you want mail to come from Connor. Until then, Resend sends from `beth.t@example.com`.
-3. In Vercel: **Settings → Environment Variables**. Add:
+2. Verify the `fulltilttoys.com` domain in Resend so mail can come from Connor.
+3. In Vercel: **Settings → Environment Variables**. These three are required:
    - `RESEND_API_KEY` = the key from step 1
    - `WHOLESALE_TO_EMAIL` = `Connor@fulltilttoys.com`
-   - Optional: `RESEND_FROM_EMAIL` = `Full Tilt Toys <Connor@fulltilttoys.com>` after the domain is verified
+   - `RESEND_FROM_EMAIL` = `Full Tilt Toys <Connor@fulltilttoys.com>`
    Apply them to Production, Preview, and Development.
 4. Redeploy. Send a test Wholesale form. You should get an email you can reply to.
 
-Until `RESEND_API_KEY` is set, this development server saves inquiries to `data/wholesale.local.json` on the machine running the site. That file is not on the public website.
+If a required variable is missing, the API returns an error and the form shows **Could not send your inquiry. Please try again.** In development only (`NODE_ENV` is not `production`), failed or unconfigured sends are also appended to `data/wholesale.local.json`. That file is gitignored and is not on the public website.
 
 ## Publish
 

@@ -132,6 +132,15 @@ async function appendLocal(row: Record<string, unknown>) {
   );
 }
 
+function isProduction() {
+  return process.env.NODE_ENV === "production";
+}
+
+async function saveLocalIfDev(row: Record<string, unknown>) {
+  if (isProduction()) return;
+  await appendLocal(row);
+}
+
 async function emailInquiry(payload: {
   name: string;
   business: string;
@@ -143,20 +152,14 @@ async function emailInquiry(payload: {
   products: WholesaleProduct[];
   notes: string;
   message: string;
+  from: string;
+  to: string;
+  apiKey: string;
 }) {
-  const apiKey = process.env.RESEND_API_KEY ?? "";
-  if (!apiKey) {
-    throw new Error("missing RESEND_API_KEY");
-  }
-
-  const from =
-    process.env.RESEND_FROM_EMAIL ||
-    "Full Tilt Toys <beth.t@example.com>";
-  const to = process.env.WHOLESALE_TO_EMAIL || WHOLESALE_TO;
-  const resend = new Resend(apiKey);
+  const resend = new Resend(payload.apiKey);
   const { error } = await resend.emails.send({
-    from,
-    to,
+    from: payload.from,
+    to: payload.to,
     replyTo: payload.email,
     subject: `Wholesale inquiry from ${payload.business || payload.name}`,
     text: payload.message,
@@ -233,17 +236,44 @@ export async function POST(request: Request) {
     ...payload,
   };
 
-  try {
-    await emailInquiry(payload);
-  } catch {
-    if (process.env.NODE_ENV === "production") {
-      return json(502, { ok: false, error: "send failed" });
-    }
+  const from = (process.env.RESEND_FROM_EMAIL ?? "").trim();
+  const apiKey = (process.env.RESEND_API_KEY ?? "").trim();
+  const to = (process.env.WHOLESALE_TO_EMAIL ?? "").trim() || WHOLESALE_TO;
+
+  if (!from) {
+    console.error(
+      "Wholesale email was not sent: RESEND_FROM_EMAIL is missing. Set a verified Resend from address (for example Full Tilt Toys <Connor@fulltilttoys.com>).",
+    );
     try {
-      await appendLocal(row);
-    } catch {
-      return json(502, { ok: false, error: "send failed" });
+      await saveLocalIfDev(row);
+    } catch (error) {
+      console.error("Wholesale local fallback failed:", error);
     }
+    return json(500, { ok: false, error: "send failed" });
+  }
+
+  if (!apiKey) {
+    console.error(
+      "Wholesale email was not sent: RESEND_API_KEY is missing. Set the Resend API key in the environment.",
+    );
+    try {
+      await saveLocalIfDev(row);
+    } catch (error) {
+      console.error("Wholesale local fallback failed:", error);
+    }
+    return json(500, { ok: false, error: "send failed" });
+  }
+
+  try {
+    await emailInquiry({ ...payload, from, to, apiKey });
+  } catch (error) {
+    console.error("Wholesale email failed to send:", error);
+    try {
+      await saveLocalIfDev(row);
+    } catch (fallbackError) {
+      console.error("Wholesale local fallback failed:", fallbackError);
+    }
+    return json(502, { ok: false, error: "send failed" });
   }
 
   return json(200, { ok: true });

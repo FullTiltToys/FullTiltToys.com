@@ -1,14 +1,18 @@
 import { mkdir, appendFile } from "node:fs/promises";
 import path from "node:path";
 
-import { site } from "@/lib/site";
+import { Resend } from "resend";
+
 import {
   WHOLESALE_BUSINESS_TYPES,
   WHOLESALE_HEAR_ABOUT,
   WHOLESALE_PRODUCT_LABELS,
 } from "@/lib/wholesale";
 
+export const runtime = "nodejs";
+
 const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const WHOLESALE_TO = "Connor@fulltilttoys.com";
 
 type WholesaleProduct = {
   name: string;
@@ -75,7 +79,7 @@ function asProducts(value: unknown): WholesaleProduct[] {
   for (const item of value) {
     if (!item || typeof item !== "object") continue;
     const record = item as { name?: unknown; quantity?: unknown };
-    const name = asText(record.name, 40);
+    const name = asText(record.name, 80);
     if (!(WHOLESALE_PRODUCT_LABELS as readonly string[]).includes(name)) continue;
     if (out.some((entry) => entry.name === name)) continue;
     const quantity = asText(record.quantity, 10).replace(/[^\d]/g, "");
@@ -140,59 +144,26 @@ async function emailInquiry(payload: {
   notes: string;
   message: string;
 }) {
-  const accessKey = process.env.WEB3FORMS_ACCESS_KEY ?? "";
-  if (!accessKey) {
-    throw new Error("missing WEB3FORMS_ACCESS_KEY");
+  const apiKey = process.env.RESEND_API_KEY ?? "";
+  if (!apiKey) {
+    throw new Error("missing RESEND_API_KEY");
   }
 
-  const to = process.env.WHOLESALE_TO_EMAIL || site.email;
-  const response = await fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      access_key: accessKey,
-      subject: `Wholesale inquiry from ${payload.business || payload.name}`,
-      from_name: "Full Tilt Toys website",
-      replyto: payload.email,
-      email: payload.email,
-      name: payload.name,
-      "Store or company": payload.business,
-      Website: payload.website || "(none)",
-      Phone: payload.phone || "(none)",
-      "Business type": payload.businessTypes.join(", "),
-      "Heard about us": payload.hearAbout,
-      "Product interest": payload.products.length
-        ? payload.products
-            .map((item) =>
-              item.quantity
-                ? `${item.name} (est. qty ${item.quantity})`
-                : item.name,
-            )
-            .join(", ")
-        : "(none)",
-      Notes: payload.notes || "(none)",
-      Message: payload.message,
-      Inbox: to,
-    }),
-    signal: AbortSignal.timeout(10000),
+  const from =
+    process.env.RESEND_FROM_EMAIL ||
+    "Full Tilt Toys <beth.t@example.com>";
+  const to = process.env.WHOLESALE_TO_EMAIL || WHOLESALE_TO;
+  const resend = new Resend(apiKey);
+  const { error } = await resend.emails.send({
+    from,
+    to,
+    replyTo: payload.email,
+    subject: `Wholesale inquiry from ${payload.business || payload.name}`,
+    text: payload.message,
   });
 
-  const text = await response.text();
-  if (!response.ok) {
-    throw new Error(`email ${response.status}`);
-  }
-
-  try {
-    const parsed = JSON.parse(text) as { success?: boolean };
-    if (parsed.success === false) throw new Error("email rejected");
-  } catch (error) {
-    if (error instanceof SyntaxError) {
-      throw new Error("email invalid response");
-    }
-    throw error;
+  if (error) {
+    throw new Error(error.message || "resend rejected");
   }
 }
 

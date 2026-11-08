@@ -1,7 +1,7 @@
 import { mkdir, appendFile } from "node:fs/promises";
 import path from "node:path";
 
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 import {
   WHOLESALE_BUSINESS_TYPES,
@@ -12,7 +12,6 @@ import {
 export const runtime = "nodejs";
 
 const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const WHOLESALE_TO = "Connor@fulltilttoys.com";
 
 type WholesaleProduct = {
   name: string;
@@ -142,32 +141,30 @@ async function saveLocalIfDev(row: Record<string, unknown>) {
 }
 
 async function emailInquiry(payload: {
-  name: string;
-  business: string;
-  website: string;
-  email: string;
-  phone: string;
-  businessTypes: string[];
-  hearAbout: string;
-  products: WholesaleProduct[];
-  notes: string;
-  message: string;
-  from: string;
+  gmailUser: string;
+  gmailPass: string;
   to: string;
-  apiKey: string;
+  email: string;
+  business: string;
+  message: string;
 }) {
-  const resend = new Resend(payload.apiKey);
-  const { error } = await resend.emails.send({
-    from: payload.from,
-    to: payload.to,
-    replyTo: payload.email,
-    subject: `Wholesale inquiry from ${payload.business || payload.name}`,
-    text: payload.message,
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: payload.gmailUser,
+      pass: payload.gmailPass,
+    },
   });
 
-  if (error) {
-    throw new Error(error.message || "resend rejected");
-  }
+  await transporter.sendMail({
+    from: `Full Tilt Toys <${payload.gmailUser}>`,
+    to: payload.to,
+    replyTo: payload.email,
+    subject: `New wholesale inquiry – ${payload.business}`,
+    text: payload.message,
+  });
 }
 
 export async function POST(request: Request) {
@@ -236,25 +233,18 @@ export async function POST(request: Request) {
     ...payload,
   };
 
-  const from = (process.env.RESEND_FROM_EMAIL ?? "").trim();
-  const apiKey = (process.env.RESEND_API_KEY ?? "").trim();
-  const to = (process.env.WHOLESALE_TO_EMAIL ?? "").trim() || WHOLESALE_TO;
+  const gmailUser = (process.env.GMAIL_USER ?? "").trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD ?? "").replace(/\s+/g, "");
+  const to = (process.env.WHOLESALE_TO_EMAIL ?? "").trim();
 
-  if (!from) {
+  if (!gmailUser || !gmailPass || !to) {
+    const missing = [
+      !gmailUser && "GMAIL_USER",
+      !gmailPass && "GMAIL_APP_PASSWORD",
+      !to && "WHOLESALE_TO_EMAIL",
+    ].filter(Boolean);
     console.error(
-      "Wholesale email was not sent: RESEND_FROM_EMAIL is missing. Set a verified Resend from address (for example Full Tilt Toys <Connor@fulltilttoys.com>).",
-    );
-    try {
-      await saveLocalIfDev(row);
-    } catch (error) {
-      console.error("Wholesale local fallback failed:", error);
-    }
-    return json(500, { ok: false, error: "send failed" });
-  }
-
-  if (!apiKey) {
-    console.error(
-      "Wholesale email was not sent: RESEND_API_KEY is missing. Set the Resend API key in the environment.",
+      `Wholesale email was not sent: missing ${missing.join(", ")}.`,
     );
     try {
       await saveLocalIfDev(row);
@@ -265,7 +255,14 @@ export async function POST(request: Request) {
   }
 
   try {
-    await emailInquiry({ ...payload, from, to, apiKey });
+    await emailInquiry({
+      gmailUser,
+      gmailPass,
+      to,
+      email: payload.email,
+      business: payload.business,
+      message: payload.message,
+    });
   } catch (error) {
     console.error("Wholesale email failed to send:", error);
     try {

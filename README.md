@@ -11,18 +11,17 @@ npm run dev
 
 ## Wholesale inquiries
 
-The Wholesale button emails **Connor@fulltilttoys.com** through [Resend](https://resend.com). Reply-To is the shop’s email so you can answer from your inbox. A hidden honeypot field drops spam bots. The thank-you message only appears after Resend accepts the send.
+The Wholesale button emails **WHOLESALE_TO_EMAIL** through Gmail SMTP (`smtp.gmail.com`, port 465). Reply-To is the shop’s email so you can answer from your inbox. A hidden honeypot field drops spam bots. The thank-you message only appears after Gmail accepts the send.
 
-1. Create a Resend account and add an API key.
-2. Verify the `fulltilttoys.com` domain in Resend so mail can come from Connor.
-3. In Vercel: **Settings → Environment Variables**. These three are required:
-   - `RESEND_API_KEY` = the key from step 1
-   - `WHOLESALE_TO_EMAIL` = `Connor@fulltilttoys.com`
-   - `RESEND_FROM_EMAIL` = `Full Tilt Toys <Connor@fulltilttoys.com>`
-   Apply them to Production, Preview, and Development.
-4. Redeploy. Send a test Wholesale form. You should get an email you can reply to.
+These three environment variables are required (already set on Vercel for Production, Preview, and Development):
 
-If a required variable is missing, the API returns an error and the form shows **Could not send your inquiry. Please try again.** In development only (`NODE_ENV` is not `production`), failed or unconfigured sends are also appended to `data/wholesale.local.json`. That file is gitignored and is not on the public website.
+- `GMAIL_USER` = the Gmail address that sends the inquiry
+- `GMAIL_APP_PASSWORD` = a Google App Password for that account
+- `WHOLESALE_TO_EMAIL` = the inbox that should receive inquiries
+
+Mail is sent from `Full Tilt Toys <GMAIL_USER>` with subject `New wholesale inquiry – [business name]`.
+
+If a required variable is missing or the send fails, the API returns an error and the form shows **Could not send your inquiry. Please try again.** In development only (`NODE_ENV` is not `production`), failed or unconfigured sends are also appended to `data/wholesale.local.json`. That file is gitignored and is not on the public website.
 
 ## Publish
 

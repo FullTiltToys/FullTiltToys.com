@@ -292,10 +292,11 @@ export function WholesaleDialog() {
               <span
                 id="wholesale-save-error"
                 role="alert"
+                aria-live="polite"
                 hidden
-                className="mt-4 block text-[11px] font-medium text-red-600"
+                className="mt-4 block text-sm font-medium text-red-600"
               >
-                could not send, try again
+                Could not send your inquiry. Please try again.
               </span>
               <button
                 id="wholesale-submit"
@@ -307,7 +308,13 @@ export function WholesaleDialog() {
             </form>
           </div>
 
-          <div id="wholesale-thanks" hidden className="mt-8 pb-3 text-center">
+          <div
+            id="wholesale-thanks"
+            hidden
+            role="status"
+            aria-live="polite"
+            className="mt-8 pb-3 text-center"
+          >
             <p className="text-base leading-7 font-semibold text-neutral-900">
               Thank you for your inquiry! We’ll review your information and
               contact you shortly with our current catalog and pricing.

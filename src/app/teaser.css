@@ -5,8 +5,7 @@
   user-select: none;
 }
 
-.product-teaser .product-teaser-copy,
-.product-teaser-copy {
+.product-teaser .product-teaser-copy {
   filter: blur(14px);
   pointer-events: none;
   user-select: none;
